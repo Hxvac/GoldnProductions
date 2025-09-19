@@ -7,21 +7,7 @@
   <meta name="description" content="High‑velocity Roblox shorts, trailers and promo edits. Fast turnarounds. Clean captions. Viral pacing." />
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    :root{--ring:rgba(255,200,64,.25);}
-    .glass{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));backdrop-filter:blur(8px);}
-    .shine{background: radial-gradient(1200px 400px at 50% -10%, rgba(255,213,79,.18), rgba(0,0,0,0) 60%),
-                       radial-gradient(800px 300px at 90% 0%, rgba(255,255,255,.06), rgba(0,0,0,0) 60%);
-    }
-    .ringGlow{box-shadow:0 0 0 2px rgba(255,208,0,.2), 0 0 50px 4px var(--ring) inset, 0 8px 30px rgba(0,0,0,.6)}
-    .hero-gradient{background: radial-gradient(1200px 600px at 20% -10%, rgba(255,216,83,.18), rgba(0,0,0,0) 60%),
-                              radial-gradient(900px 500px at 90% 0%, rgba(255,255,255,.06), rgba(0,0,0,0) 60%),
-                              linear-gradient(180deg, #0b0b0f 0%, #0a0a0b 60%, #070708 100%);}  
-    .card{border:1px solid rgb(39 39 42 / .6); background:linear-gradient(180deg, rgba(20,20,23,.7), rgba(12,12,14,.7));}
-    .marquee{white-space:nowrap; overflow:hidden; mask-image:linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%)}
-    .marquee-track{display:inline-block; padding-left:2rem; animation:scroll 18s linear infinite}
-    @keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-    .fade{opacity:0; transform:translateY(8px); transition: all .4s ease}
-    .fade.show{opacity:1; transform:none}
+    :root{--ring:rgba(255,200,64,.25);} .glass{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));backdrop-filter:blur(8px);} .shine{background: radial-gradient(1200px 400px at 50% -10%, rgba(255,213,79,.18), rgba(0,0,0,0) 60%), radial-gradient(800px 300px at 90% 0%, rgba(255,255,255,.06), rgba(0,0,0,0) 60%);} .ringGlow{box-shadow:0 0 0 2px rgba(255,208,0,.2), 0 0 50px 4px var(--ring) inset, 0 8px 30px rgba(0,0,0,.6)} .hero-gradient{background: radial-gradient(1200px 600px at 20% -10%, rgba(255,216,83,.18), rgba(0,0,0,0) 60%), radial-gradient(900px 500px at 90% 0%, rgba(255,255,255,.06), rgba(0,0,0,0) 60%), linear-gradient(180deg, #0b0b0f 0%, #0a0a0b 60%, #070708 100%);} .card{border:1px solid rgb(39 39 42 / .6); background:linear-gradient(180deg, rgba(20,20,23,.7), rgba(12,12,14,.7));} .marquee{white-space:nowrap; overflow:hidden; mask-image:linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%)} .marquee-track{display:inline-block; padding-left:2rem; animation:scroll 18s linear infinite} @keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}} .fade{opacity:0; transform:translateY(8px); transition: all .4s ease} .fade.show{opacity:1; transform:none}
   </style>
 </head>
 <body class="bg-black text-zinc-100 selection:bg-yellow-400/30">
@@ -50,9 +36,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <div class="grid lg:grid-cols-12 gap-8 items-center">
         <div class="lg:col-span-7">
-          <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
-            Roblox Shorts that <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-600">stop the scroll</span>.
-          </h1>
+          <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">Roblox Shorts that <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-600">stop the scroll</span>.</h1>
           <p class="mt-4 text-zinc-300 max-w-2xl">We craft high‑retention shorts, trailers, and promo edits for Roblox creators and studios. Clean captions, punchy cuts, viral pacing — delivered fast.</p>
           <div class="mt-6 flex flex-wrap gap-3">
             <a href="#work" class="px-5 py-3 rounded-xl bg-yellow-500 text-zinc-900 font-semibold hover:bg-yellow-400">See Work</a>
@@ -60,17 +44,41 @@
           </div>
           <div class="mt-8 grid grid-cols-3 sm:grid-cols-4 gap-3 text-sm">
             <div class="card rounded-2xl p-4 text-center"><div class="text-2xl font-bold">85M+</div><div class="text-zinc-400 mt-1">Contributed views*</div></div>
-            <div class="card rounded-2xl p-4 text-center"><div class="text-2xl font-bold"><24h</div><div class="text-zinc-400 mt-1">Typical turnaround</div></div>
+            <div class="card rounded-2xl p-4 text-center"><div class="text-2xl font-bold">&lt;24h</div><div class="text-zinc-400 mt-1">Turnaround</div></div>
             <div class="card rounded-2xl p-4 text-center"><div id="liveCounter" class="text-2xl font-bold">1</div><div class="text-zinc-400 mt-1">Live group members</div></div>
             <div class="hidden sm:block card rounded-2xl p-4 text-center"><div class="text-2xl font-bold">5★</div><div class="text-zinc-400 mt-1">Client rating</div></div>
           </div>
         </div>
         <div class="lg:col-span-5">
-          <div class="relative">
-            <div class="absolute -inset-1 rounded-3xl blur-2xl bg-gradient-to-tr from-yellow-500/20 to-white/10"></div>
-            <video class="relative w-full rounded-3xl border border-zinc-800 shadow-2xl" src="https://cdn.coverr.co/videos/coverr-gaming-setup-7067/1080p.mp4" autoplay muted loop playsinline></video>
+          <!-- TRUST BAR replacing demo reel -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center mt-6">
+            <div class="p-4 rounded-xl bg-zinc-900/50">
+              <div class="text-2xl font-bold text-yellow-400">85M+</div>
+              <div class="text-sm text-zinc-400">Contributed Views</div>
+            </div>
+            <div class="p-4 rounded-xl bg-zinc-900/50">
+              <div class="text-2xl font-bold text-yellow-400">&lt;24h</div>
+              <div class="text-sm text-zinc-400">Turnaround</div>
+            </div>
+            <div class="p-4 rounded-xl bg-zinc-900/50">
+              <div class="text-2xl font-bold text-yellow-400">1</div>
+              <div class="text-sm text-zinc-400">Live Group Member</div>
+            </div>
+            <div class="p-4 rounded-xl bg-zinc-900/50">
+              <div class="text-2xl font-bold text-yellow-400">5★</div>
+              <div class="text-sm text-zinc-400">Client Rating</div>
+            </div>
           </div>
-          <p class="text-xs text-zinc-500 mt-2">Demo reel placeholder — swap with your compilation later.</p>
+
+          <div class="card rounded-2xl p-5 mt-6">
+            <p class="text-sm text-zinc-400">Trusted by creators & dev teams</p>
+            <div class="grid grid-cols-3 gap-3 mt-3">
+              <div class="h-12 rounded-xl border border-zinc-800 bg-zinc-900/60 grid place-items-center text-xs text-zinc-400">Add logo</div>
+              <div class="h-12 rounded-xl border border-zinc-800 bg-zinc-900/60 grid place-items-center text-xs text-zinc-400">Add logo</div>
+              <div class="h-12 rounded-xl border border-zinc-800 bg-zinc-900/60 grid place-items-center text-xs text-zinc-400">Add logo</div>
+            </div>
+            <p class="text-xs text-zinc-500 mt-3">Swap with client logos when ready.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -93,27 +101,18 @@
         <h2 class="text-2xl md:text-3xl font-bold">Recent Work</h2>
         <a href="https://www.youtube.com/@brandnisonline" target="_blank" class="text-sm text-yellow-300 hover:underline">See more on YouTube →</a>
       </div>
-      <style>
-        .phone-frame{aspect-ratio:9/16; background:#000;}
-        .phone-iframe{width:100%; height:100%; border:0;}
-      </style>
+      <style>.phone-frame{aspect-ratio:9/16;background:#000}.phone-iframe{width:100%;height:100%;border:0}</style>
       <div class="grid md:grid-cols-3 gap-5">
         <article class="card rounded-2xl overflow-hidden fade">
-          <div class="phone-frame">
-            <iframe class="phone-iframe" src="https://www.youtube.com/embed/HTPDa4-VWtQ?autoplay=1&mute=1&loop=1&playlist=HTPDa4-VWtQ&controls=0&modestbranding=1" allow="autoplay; encrypted-media" loading="lazy"></iframe>
-          </div>
+          <div class="phone-frame"><iframe class="phone-iframe" src="https://www.youtube.com/embed/HTPDa4-VWtQ?autoplay=1&mute=1&loop=1&playlist=HTPDa4-VWtQ&controls=0&modestbranding=1" allow="autoplay; encrypted-media" loading="lazy"></iframe></div>
           <div class="p-4"><div class="font-semibold">Roblox Edit #1</div><p class="text-sm text-zinc-400">Clean captions + pacing.</p></div>
         </article>
         <article class="card rounded-2xl overflow-hidden fade">
-          <div class="phone-frame">
-            <iframe class="phone-iframe" src="https://www.youtube.com/embed/sHFETDYToEU?autoplay=1&mute=1&loop=1&playlist=sHFETDYToEU&controls=0&modestbranding=1" allow="autoplay; encrypted-media" loading="lazy"></iframe>
-          </div>
+          <div class="phone-frame"><iframe class="phone-iframe" src="https://www.youtube.com/embed/sHFETDYToEU?autoplay=1&mute=1&loop=1&playlist=sHFETDYToEU&controls=0&modestbranding=1" allow="autoplay; encrypted-media" loading="lazy"></iframe></div>
           <div class="p-4"><div class="font-semibold">Roblox Edit #2</div><p class="text-sm text-zinc-400">Fast cuts + effects.</p></div>
         </article>
         <article class="card rounded-2xl overflow-hidden fade">
-          <div class="phone-frame">
-            <iframe class="phone-iframe" src="https://www.youtube.com/embed/db3hIGqW1gQ?autoplay=1&mute=1&loop=1&playlist=db3hIGqW1gQ&controls=0&modestbranding=1" allow="autoplay; encrypted-media" loading="lazy"></iframe>
-          </div>
+          <div class="phone-frame"><iframe class="phone-iframe" src="https://www.youtube.com/embed/db3hIGqW1gQ?autoplay=1&mute=1&loop=1&playlist=db3hIGqW1gQ&controls=0&modestbranding=1" allow="autoplay; encrypted-media" loading="lazy"></iframe></div>
           <div class="p-4"><div class="font-semibold">Roblox Edit #3</div><p class="text-sm text-zinc-400">Trend sync + captions.</p></div>
         </article>
       </div>
@@ -125,9 +124,9 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <h2 class="text-2xl md:text-3xl font-bold mb-8">Services</h2>
       <div class="grid md:grid-cols-3 gap-5">
-        <div class="card rounded-2xl p-6 fade"><div class="text-xl font-semibold">Roblox Shorts</div><p class="text-zinc-400 mt-2">15–45s edits with clean captions, sound design, zooms, and hooks.</p></div>
-        <div class="card rounded-2xl p-6 fade"><div class="text-xl font-semibold">Trailers & Teasers</div><p class="text-zinc-400 mt-2">30–60s cinematic promos for game launches or updates.</p></div>
-        <div class="card rounded-2xl p-6 fade"><div class="text-xl font-semibold">Caption Packs</div><p class="text-zinc-400 mt-2">Goldn‑style caption templates for your editors (CapCut/AE).</p></div>
+        <div class="card rounded-2xl p-6 fade"><div class="text-xl font-semibold">Roblox Shorts</div><p class="text-zinc-400 mt-2">15–45s edits with clean captions, sound design, zooms, and hooks.</p><ul class="mt-4 text-sm text-zinc-300 list-disc pl-5 space-y-1"><li>Hook writing</li><li>Auto/Manual captions</li><li>Trend‑aware pacing</li></ul></div>
+        <div class="card rounded-2xl p-6 fade"><div class="text-xl font-semibold">Trailers & Teasers</div><p class="text-zinc-400 mt-2">30–60s cinematic promos for game launches or updates.</p><ul class="mt-4 text-sm text-zinc-300 list-disc pl-5 space-y-1"><li>Storyboard + script</li><li>SFX + whooshes</li><li>Logo/Title animations</li></ul></div>
+        <div class="card rounded-2xl p-6 fade"><div class="text-xl font-semibold">Caption Packs</div><p class="text-zinc-400 mt-2">Goldn‑style caption templates for your editors (CapCut/AE).</p><ul class="mt-4 text-sm text-zinc-300 list-disc pl-5 space-y-1"><li>Brand fonts/colors</li><li>Export‑ready presets</li><li>Usage guide</li></ul></div>
       </div>
     </div>
   </section>
@@ -137,29 +136,14 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <h2 class="text-2xl md:text-3xl font-bold mb-8">Pricing</h2>
       <div class="grid md:grid-cols-3 gap-5">
-        <div class="card rounded-2xl p-6 fade">
-          <div class="text-sm text-zinc-400">Starter</div>
-          <div class="text-3xl font-extrabold mt-1">1 Short</div>
-          <div class="mt-2 text-2xl font-bold text-yellow-400">$4 <span class="text-zinc-400 text-base">/ 1,200 Robux</span></div>
-          <p class="text-zinc-400 mt-2">Great for testing pacing and style.</p>
-        </div>
-        <div class="card rounded-2xl p-6 ringGlow fade">
-          <div class="text-sm text-zinc-400">Growth</div>
-          <div class="text-3xl font-extrabold mt-1">5 Shorts</div>
-          <div class="mt-2 text-2xl font-bold text-yellow-400">$18 <span class="text-zinc-400 text-base">/ 5,000 Robux</span></div>
-          <p class="text-zinc-400 mt-2">Our most popular bundle for consistency.</p>
-        </div>
-        <div class="card rounded-2xl p-6 fade">
-          <div class="text-sm text-zinc-400">Standard</div>
-          <div class="text-3xl font-extrabold mt-1">10 Shorts</div>
-          <div class="mt-2 text-2xl font-bold text-yellow-400">$40 <span class="text-zinc-400 text-base">/ 12,000 Robux</span></div>
-          <p class="text-zinc-400 mt-2">Perfect for creators needing steady content.</p>
-        </div>
+        <div class="card rounded-2xl p-6 fade"><div class="text-sm text-zinc-400">Starter</div><div class="text-3xl font-extrabold mt-1">1 Short</div><div class="mt-2 text-2xl font-bold text-yellow-400">$4 <span class="text-zinc-400 text-base">/ 1,200 Robux</span></div><p class="text-zinc-400 mt-2">Great for testing pacing and style.</p><ul class="mt-4 text-sm text-zinc-300 space-y-1"><li>15–30s edit</li><li>Basic captions</li><li>1 revision</li></ul><a href="https://discord.gg/dh2azNrU6q" target="_blank" rel="noopener" class="mt-6 inline-block px-4 py-2 rounded-xl border border-zinc-700 hover:bg-zinc-800">Order on Discord</a></div>
+        <div class="card rounded-2xl p-6 ringGlow fade"><div class="text-sm text-zinc-400">Growth</div><div class="text-3xl font-extrabold mt-1">5 Shorts</div><div class="mt-2 text-2xl font-bold text-yellow-400">$18 <span class="text-zinc-400 text-base">/ 5,000 Robux</span></div><p class="text-zinc-400 mt-2">Our most popular bundle for consistency.</p><ul class="mt-4 text-sm text-zinc-300 space-y-1"><li>15–45s each</li><li>Goldn captions</li><li>Priority delivery</li></ul><a href="https://discord.gg/dh2azNrU6q" target="_blank" rel="noopener" class="mt-6 inline-block px-4 py-2 rounded-xl bg-yellow-500 text-zinc-900 font-semibold hover:bg-yellow-400">Order on Discord</a></div>
+        <div class="card rounded-2xl p-6 fade"><div class="text-sm text-zinc-400">Standard</div><div class="text-3xl font-extrabold mt-1">10 Shorts</div><div class="mt-2 text-2xl font-bold text-yellow-400">$40 <span class="text-zinc-400 text-base">/ 12,000 Robux</span></div><p class="text-zinc-400 mt-2">Perfect for creators needing steady content.</p><ul class="mt-4 text-sm text-zinc-300 space-y-1"><li>15–45s each</li><li>Goldn captions</li><li>Priority delivery</li></ul><a href="https://discord.gg/dh2azNrU6q" target="_blank" rel="noopener" class="mt-6 inline-block px-4 py-2 rounded-xl border border-zinc-700 hover:bg-zinc-800">Order on Discord</a></div>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT -->
+  <!-- CONTACT (Discord CTA) -->
   <section id="contact" class="py-20">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center">
       <div class="card rounded-2xl p-8">
@@ -181,22 +165,16 @@
   </footer>
 
   <script>
+    // Reveal on scroll
     const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target)}}),{threshold:.15});
     document.querySelectorAll('.fade').forEach(el=>io.observe(el));
     document.getElementById('year').textContent=new Date().getFullYear();
-  </script>
-  <script>
-    // Make the top-right CTA go to Discord and say "Order"
-    (function(){
-      const cta = document.querySelector('header a.ringGlow');
-      if (cta){ cta.textContent = 'Order'; cta.href = 'https://discord.gg/dh2azNrU6q'; cta.target = '_blank'; cta.rel = 'noopener'; }
-      // Update all pricing card buttons to Discord
-      document.querySelectorAll('#pricing a').forEach(a=>{
-        a.href = 'https://discord.gg/dh2azNrU6q';
-        a.target = '_blank'; a.rel='noopener';
-        a.textContent = 'Order on Discord';
-      });
-    })();
+
+    // Live members placeholder: double‑click to change quickly
+    const liveCounter=document.getElementById('liveCounter');
+    const saved=localStorage.getItem('goldn_live_members');
+    let n=saved?Number(saved):1; function render(){liveCounter.textContent=n.toLocaleString();}
+    render(); liveCounter.addEventListener('dblclick',()=>{const x=prompt('Set live group members:', n); if(x!==null){n=Number(x)||n; localStorage.setItem('goldn_live_members', n); render();}});
   </script>
 </body>
 </html>
