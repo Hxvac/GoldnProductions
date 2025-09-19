@@ -1,705 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Roblox Business Hub (Private)</title>
-  <!-- Tailwind via CDN -->
+  <title>Goldn Productions — Roblox Editing & Trailers</title>
+  <meta name="description" content="High‑velocity Roblox shorts, trailers and promo edits. Fast turnarounds. Clean captions. Viral pacing." />
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* Simple fade */
-    .fade-enter { opacity: 0; transform: translateY(4px); }
-    .fade-enter-active { opacity: 1; transform: translateY(0); transition: all 180ms ease; }
-    .tab-active { background: rgba(255,255,255,0.08); }
-    .card { @apply bg-zinc-900/60 border border-zinc-800 rounded-2xl p-5 shadow; }
-    .btn { @apply rounded-xl px-4 py-2 border border-zinc-700 bg-zinc-800 hover:bg-zinc-700 transition; }
-    .btn-ghost { @apply rounded-xl px-3 py-2 hover:bg-zinc-800 transition; }
-    .input { @apply w-full rounded-xl bg-zinc-900 border border-zinc-800 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500/40; }
-    .label { @apply text-sm text-zinc-400; }
-    .pill { @apply text-xs px-2.5 py-1 rounded-full; }
+    :root{--ring:rgba(255,200,64,.25);}
+    .glass{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));backdrop-filter:blur(8px);}
+    .shine{background: radial-gradient(1200px 400px at 50% -10%, rgba(255,213,79,.18), rgba(0,0,0,0) 60%),
+                       radial-gradient(800px 300px at 90% 0%, rgba(255,255,255,.06), rgba(0,0,0,0) 60%);
+    }
+    .ringGlow{box-shadow:0 0 0 2px rgba(255,208,0,.2), 0 0 50px 4px var(--ring) inset, 0 8px 30px rgba(0,0,0,.6)}
+    .hero-gradient{background: radial-gradient(1200px 600px at 20% -10%, rgba(255,216,83,.18), rgba(0,0,0,0) 60%),
+                              radial-gradient(900px 500px at 90% 0%, rgba(255,255,255,.06), rgba(0,0,0,0) 60%),
+                              linear-gradient(180deg, #0b0b0f 0%, #0a0a0b 60%, #070708 100%);}  
+    .card{border:1px solid rgb(39 39 42 / .6); background:linear-gradient(180deg, rgba(20,20,23,.7), rgba(12,12,14,.7));}
+    .marquee{white-space:nowrap; overflow:hidden; mask-image:linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%)}
+    .marquee-track{display:inline-block; padding-left:2rem; animation:scroll 18s linear infinite}
+    @keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+    .fade{opacity:0; transform:translateY(8px); transition: all .4s ease}
+    .fade.show{opacity:1; transform:none}
   </style>
 </head>
-<body class="bg-zinc-950 text-zinc-100 min-h-screen">
-  <div class="max-w-7xl mx-auto p-4 sm:p-6">
-    <!-- Header -->
-    <header class="flex items-center justify-between mb-6">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-2xl grid place-items-center bg-gradient-to-br from-amber-400 to-yellow-600 text-zinc-950 font-extrabold">R$</div>
-        <div>
-          <h1 class="text-xl sm:text-2xl font-bold tracking-tight">Roblox Business Hub <span class="text-zinc-400 text-sm">(Private)</span></h1>
-          <p class="text-zinc-400 text-sm">Gold/Black dashboard for commissions, content & goals</p>
+<body class="bg-black text-zinc-100 selection:bg-yellow-400/30">
+  <!-- NAV -->
+  <header class="fixed top-0 inset-x-0 z-50">
+    <nav class="mx-auto max-w-7xl px-4 sm:px-6">
+      <div class="mt-4 glass border border-zinc-800 rounded-2xl px-4 py-2 flex items-center justify-between">
+        <a href="#" class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl grid place-items-center bg-gradient-to-br from-amber-400 to-yellow-600 text-zinc-950 font-extrabold">G</div>
+          <span class="font-semibold tracking-tight">Goldn Productions</span>
+        </a>
+        <div class="hidden md:flex items-center gap-6 text-sm">
+          <a href="#work" class="hover:text-yellow-300">Work</a>
+          <a href="#services" class="hover:text-yellow-300">Services</a>
+          <a href="#pricing" class="hover:text-yellow-300">Pricing</a>
+          <a href="#contact" class="hover:text-yellow-300">Contact</a>
+          <a href="/hub.html" class="ml-2 px-3 py-1 rounded-lg text-xs border border-zinc-700 hover:bg-zinc-800">Open Hub</a>
+          <a href="#contact" class="ml-1 px-4 py-2 rounded-xl ringGlow bg-zinc-900 border border-yellow-500/30 hover:bg-zinc-800">Get a Quote</a>
         </div>
       </div>
-      <div class="flex items-center gap-2">
-        <button id="exportBtn" class="btn">Export JSON</button>
-        <label class="btn cursor-pointer">
-          <input id="importInput" type="file" accept="application/json" class="hidden" />
-          Import JSON
-        </label>
-        <button id="resetBtn" class="btn border-red-700/70 bg-red-800/30 hover:bg-red-700/40">Reset</button>
-      </div>
-    </header>
-
-    <!-- Nav Tabs -->
-    <nav class="sticky top-0 z-10 mb-6 backdrop-blur supports-[backdrop-filter]:bg-zinc-950/60 rounded-2xl border border-zinc-800">
-      <ul class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
-        <li><a data-tab="customers" class="block text-center px-4 py-3 hover:bg-zinc-800/40 transition">👥 Customers</a></li>
-        <li><a data-tab="content" class="block text-center px-4 py-3 hover:bg-zinc-800/40 transition">🎬 Content</a></li>
-        <li><a data-tab="tasks" class="block text-center px-4 py-3 hover:bg-zinc-800/40 transition">✅ Tasks</a></li>
-        <li><a data-tab="achievements" class="block text-center px-4 py-3 hover:bg-zinc-800/40 transition">🏆 Achievements</a></li>
-        <li><a data-tab="ideas" class="block text-center px-4 py-3 hover:bg-zinc-800/40 transition">💡 Ideas</a></li>
-      </ul>
     </nav>
+  </header>
 
-    <!-- Tabs Content Wrapper -->
-    <section id="views" class="space-y-6">
-      <!-- PROFIT -->
-      <div id="view-profit" class="card">
-        <div class="flex items-center justify-between mb-4">
-          <h2 class="text-lg font-semibold">Profit Dashboard</h2>
-          <span class="text-xs text-zinc-400">Phase 1 · manual inputs (saved locally)</span>
+  <!-- HERO -->
+  <section class="hero-gradient pt-32 pb-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="grid lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-7">
+          <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
+            Roblox Shorts that <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-600">stop the scroll</span>.
+          </h1>
+          <p class="mt-4 text-zinc-300 max-w-2xl">We craft high‑retention shorts, trailers, and promo edits for Roblox creators and studios. Clean captions, punchy cuts, viral pacing — delivered fast.</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="#work" class="px-5 py-3 rounded-xl bg-yellow-500 text-zinc-900 font-semibold hover:bg-yellow-400">See Work</a>
+            <a href="#pricing" class="px-5 py-3 rounded-xl border border-zinc-700 bg-zinc-900 hover:bg-zinc-800">View Pricing</a>
+          </div>
+          <div class="mt-8 grid grid-cols-3 sm:grid-cols-4 gap-3 text-sm">
+            <div class="card rounded-2xl p-4 text-center"><div class="text-2xl font-bold">150M+</div><div class="text-zinc-400 mt-1">Total views edited*</div></div>
+            <div class="card rounded-2xl p-4 text-center"><div class="text-2xl font-bold">24‑48h</div><div class="text-zinc-400 mt-1">Typical turnaround</div></div>
+            <div class="card rounded-2xl p-4 text-center"><div id="liveCounter" class="text-2xl font-bold">—</div><div class="text-zinc-400 mt-1">Live group members</div></div>
+            <div class="hidden sm:block card rounded-2xl p-4 text-center"><div class="text-2xl font-bold">4.9★</div><div class="text-zinc-400 mt-1">Client rating</div></div>
+          </div>
         </div>
-        <div class="grid lg:grid-cols-3 gap-4">
-          <div class="space-y-3">
-            <div>
-              <label class="label">Pending Robux</label>
-              <input id="pendingRobux" type="number" class="input" placeholder="e.g., 11000" />
-            </div>
-            <div>
-              <label class="label">Current Balance (Robux)</label>
-              <input id="balanceRobux" type="number" class="input" placeholder="e.g., 19000" />
-            </div>
-            <div>
-              <label class="label">Goal (Robux)</label>
-              <input id="goalRobux" type="number" class="input" placeholder="e.g., 100000" />
-            </div>
-            <div>
-              <label class="label">USD per 1 Robux (custom)</label>
-              <input id="usdPerRobux" type="number" step="0.0001" class="input" placeholder="e.g., 0.0035" />
-              <p class="text-xs text-zinc-500 mt-1">Set your own conversion (DevEx-equivalent or whatever estimate you prefer).</p>
-            </div>
-            <button id="saveProfit" class="btn">Save</button>
+        <div class="lg:col-span-5">
+          <div class="relative">
+            <div class="absolute -inset-1 rounded-3xl blur-2xl bg-gradient-to-tr from-yellow-500/20 to-white/10"></div>
+            <video class="relative w-full rounded-3xl border border-zinc-800 shadow-2xl" src="https://cdn.coverr.co/videos/coverr-gaming-setup-7067/1080p.mp4" autoplay muted loop playsinline></video>
           </div>
-
-          <div class="lg:col-span-2">
-            <div class="grid sm:grid-cols-2 gap-4">
-              <div class="card">
-                <p class="text-zinc-400 text-sm">Total Robux (Pending + Balance)</p>
-                <p id="totalRobux" class="text-2xl font-semibold mt-1">0</p>
-              </div>
-              <div class="card">
-                <p class="text-zinc-400 text-sm">Approx. USD</p>
-                <p id="approxUsd" class="text-2xl font-semibold mt-1">$0.00</p>
-              </div>
-            </div>
-
-            <div class="mt-4 card">
-              <div class="flex items-center justify-between mb-2">
-                <p class="text-zinc-400 text-sm">Goal Progress</p>
-                <p id="goalPct" class="text-sm font-medium">0%</p>
-              </div>
-              <div class="w-full h-3 bg-zinc-800 rounded-full overflow-hidden">
-                <div id="goalBar" class="h-3 bg-gradient-to-r from-amber-400 to-yellow-600 rounded-full" style="width:0%"></div>
-              </div>
-              <p id="goalCaption" class="text-xs text-zinc-500 mt-2">0 / 0 Robux</p>
-            </div>
-
-            <div class="mt-4 grid sm:grid-cols-2 gap-4">
-              <div class="card">
-                <p class="text-zinc-400 text-sm">Notes</p>
-                <textarea id="profitNotes" class="input h-24" placeholder="Anything about payouts, who owes what, etc."></textarea>
-                <button id="saveProfitNotes" class="btn mt-2">Save Notes</button>
-              </div>
-              <div class="card">
-                <p class="text-zinc-400 text-sm">Quick Add Payout</p>
-                <div class="grid grid-cols-2 gap-2 mt-2">
-                  <input id="payoutDesc" class="input" placeholder="Description" />
-                  <input id="payoutAmount" type="number" class="input" placeholder="Robux" />
-                </div>
-                <button id="addPayout" class="btn mt-2">Add to Log</button>
-                <ul id="payoutLog" class="mt-3 space-y-1 text-sm"></ul>
-              </div>
-            </div>
-          </div>
+          <p class="text-xs text-zinc-500 mt-2">Demo reel placeholder — swap with your compilation later.</p>
         </div>
       </div>
+    </div>
 
-      <!-- CUSTOMERS -->
-      <div id="view-customers" class="card hidden">
-        <div class="flex items-center justify-between mb-4">
-          <h2 class="text-lg font-semibold">Customer Management</h2>
-          <div class="flex items-center gap-2">
-            <button id="addCustomerBtn" class="btn">Add Customer</button>
-          </div>
-        </div>
-
-        <div class="overflow-x-auto border border-zinc-800 rounded-2xl">
-          <table class="min-w-full text-sm">
-            <thead class="bg-zinc-900/60">
-              <tr class="text-left">
-                <th class="px-4 py-3">Name</th>
-                <th class="px-4 py-3">Discord</th>
-                <th class="px-4 py-3">Order</th>
-                <th class="px-4 py-3">Status</th>
-                <th class="px-4 py-3">Payment</th>
-                <th class="px-4 py-3">Notes</th>
-                <th class="px-4 py-3">Actions</th>
-              </tr>
-            </thead>
-            <tbody id="customerBody" class="divide-y divide-zinc-800"></tbody>
-          </table>
+    <!-- Marquee -->
+    <div class="mt-12 py-4 border-t border-zinc-800/60">
+      <div class="marquee text-zinc-400 text-sm">
+        <div class="marquee-track">
+          <span class="mx-6">Fast Trailers</span><span class="mx-6">Caption Packs</span><span class="mx-6">YouTube Shorts</span><span class="mx-6">TikTok Optimized</span><span class="mx-6">Roblox Dev Promos</span>
+          <span class="mx-6">Fast Trailers</span><span class="mx-6">Caption Packs</span><span class="mx-6">YouTube Shorts</span><span class="mx-6">TikTok Optimized</span><span class="mx-6">Roblox Dev Promos</span>
         </div>
       </div>
+    </div>
+  </section>
 
-      <!-- CONTENT -->
-      <div id="view-content" class="card hidden">
-        <div class="flex items-center justify-between mb-4">
-          <h2 class="text-lg font-semibold">Content Tracking</h2>
-          <button id="addContentBtn" class="btn">Add Item</button>
+  <!-- WORK -->
+  <section id="work" class="py-20 shine">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="flex items-end justify-between mb-6">
+        <h2 class="text-2xl md:text-3xl font-bold">Recent Work</h2>
+        <a href="#contact" class="text-sm text-yellow-300 hover:underline">Need something like this? →</a>
+      </div>
+      <div class="grid md:grid-cols-3 gap-5">
+        <!-- Card -->
+        <article class="card rounded-2xl overflow-hidden fade">
+          <div class="aspect-video bg-zinc-900">
+            <iframe class="w-full h-full" src="https://www.youtube.com/embed/ct_tu3b9L8k?rel=0&modestbranding=1" title="Showcase" allowfullscreen></iframe>
+          </div>
+          <div class="p-4">
+            <div class="font-semibold">Trailer — Simulator Launch</div>
+            <p class="text-sm text-zinc-400">Cut + captions + SFX + motion.</p>
+          </div>
+        </article>
+        <article class="card rounded-2xl overflow-hidden fade">
+          <div class="aspect-video bg-zinc-900">
+            <iframe class="w-full h-full" src="https://www.youtube.com/embed/0-7IHOXkiV8?rel=0&modestbranding=1" title="Showcase" allowfullscreen></iframe>
+          </div>
+          <div class="p-4">
+            <div class="font-semibold">Short — Viral Moments Edit</div>
+            <p class="text-sm text-zinc-400">Beat sync + zooms + memes.</p>
+          </div>
+        </article>
+        <article class="card rounded-2xl overflow-hidden fade">
+          <div class="aspect-video bg-zinc-900">
+            <iframe class="w-full h-full" src="https://www.youtube.com/embed/1La4QzGeaaQ?rel=0&modestbranding=1" title="Showcase" allowfullscreen></iframe>
+          </div>
+          <div class="p-4">
+            <div class="font-semibold">Announcement — Update Teaser</div>
+            <p class="text-sm text-zinc-400">Hook‑first scripting + captions.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <h2 class="text-2xl md:text-3xl font-bold mb-8">Services</h2>
+      <div class="grid md:grid-cols-3 gap-5">
+        <div class="card rounded-2xl p-6 fade">
+          <div class="text-xl font-semibold">Roblox Shorts</div>
+          <p class="text-zinc-400 mt-2">15–45s edits with clean captions, sound design, zooms, and hooks.</p>
+          <ul class="mt-4 text-sm text-zinc-300 list-disc pl-5 space-y-1">
+            <li>Hook writing</li>
+            <li>Auto/Manual captions</li>
+            <li>Trend‑aware pacing</li>
+          </ul>
         </div>
-
-        <div class="grid md:grid-cols-2 gap-4">
-          <div class="card">
-            <h3 class="font-medium mb-2">Portfolio / Deliveries</h3>
-            <div class="grid grid-cols-2 gap-2">
-              <input id="contentTitle" class="input" placeholder="Title (e.g., Trailer for X)" />
-              <input id="contentLink" class="input" placeholder="Link (YouTube/Drive)" />
-            </div>
-            <textarea id="contentNotes" class="input mt-2 h-20" placeholder="Notes"></textarea>
-            <button id="saveContent" class="btn mt-2">Save</button>
-            <ul id="contentList" class="mt-3 space-y-2 text-sm"></ul>
-          </div>
-
-          <div class="card">
-            <h3 class="font-medium mb-2">Channel Stats (manual)</h3>
-            <div class="grid grid-cols-2 gap-2">
-              <div>
-                <label class="label">TikTok Followers</label>
-                <input id="ttFollowers" type="number" class="input" />
-              </div>
-              <div>
-                <label class="label">TikTok Likes (total)</label>
-                <input id="ttLikes" type="number" class="input" />
-              </div>
-              <div>
-                <label class="label">YouTube Subs</label>
-                <input id="ytSubs" type="number" class="input" />
-              </div>
-              <div>
-                <label class="label">YouTube Views (28d)</label>
-                <input id="ytViews" type="number" class="input" />
-              </div>
-            </div>
-            <button id="saveStats" class="btn mt-2">Save Stats</button>
-            <div class="mt-3 text-sm text-zinc-400" id="statsPreview"></div>
-          </div>
+        <div class="card rounded-2xl p-6 fade">
+          <div class="text-xl font-semibold">Trailers & Teasers</div>
+          <p class="text-zinc-400 mt-2">30–60s cinematic promos for game launches or updates.</p>
+          <ul class="mt-4 text-sm text-zinc-300 list-disc pl-5 space-y-1">
+            <li>Storyboard + script</li>
+            <li>SFX + whooshes</li>
+            <li>Logo/Title animations</li>
+          </ul>
+        </div>
+        <div class="card rounded-2xl p-6 fade">
+          <div class="text-xl font-semibold">Caption Packs</div>
+          <p class="text-zinc-400 mt-2">Goldn‑style caption templates for your editors (CapCut/AE).</p>
+          <ul class="mt-4 text-sm text-zinc-300 list-disc pl-5 space-y-1">
+            <li>Brand fonts/colors</li>
+            <li>Export‑ready presets</li>
+            <li>Usage guide</li>
+          </ul>
         </div>
       </div>
+    </div>
+  </section>
 
-      <!-- TASKS -->
-      <div id="view-tasks" class="card hidden">
-        <div class="flex items-center justify-between mb-4">
-          <h2 class="text-lg font-semibold">Tasks</h2>
-          <button id="addTaskBtn" class="btn">Add Task</button>
+  <!-- PRICING -->
+  <section id="pricing" class="py-20 shine">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <h2 class="text-2xl md:text-3xl font-bold mb-8">Pricing</h2>
+      <div class="grid md:grid-cols-3 gap-5">
+        <div class="card rounded-2xl p-6 fade">
+          <div class="text-sm text-zinc-400">Starter</div>
+          <div class="text-3xl font-extrabold mt-1">1 Short</div>
+          <p class="text-zinc-400 mt-2">Great for testing pacing and style.</p>
+          <ul class="mt-4 text-sm text-zinc-300 space-y-1">
+            <li>15–30s edit</li>
+            <li>Basic captions</li>
+            <li>1 revision</li>
+          </ul>
+          <a href="#contact" class="mt-6 inline-block px-4 py-2 rounded-xl border border-zinc-700 hover:bg-zinc-800">Get quote</a>
         </div>
-        <div class="grid md:grid-cols-2 gap-4">
-          <div class="card">
-            <h3 class="font-medium mb-2">New Task</h3>
-            <input id="taskTitle" class="input mb-2" placeholder="e.g., Edit 3 shorts for Client A" />
-            <div class="grid grid-cols-2 gap-2">
-              <input id="taskDue" type="date" class="input" />
-              <select id="taskPriority" class="input">
-                <option value="Low">Low</option>
-                <option value="Medium">Medium</option>
-                <option value="High">High</option>
-              </select>
-            </div>
-            <textarea id="taskNotes" class="input mt-2 h-20" placeholder="Details / deliverables"></textarea>
-            <button id="saveTask" class="btn mt-2">Save Task</button>
-          </div>
-          <div class="card">
-            <h3 class="font-medium mb-2">Task List</h3>
-            <ul id="taskList" class="space-y-2"></ul>
-          </div>
+        <div class="card rounded-2xl p-6 ringGlow fade">
+          <div class="text-sm text-zinc-400">Growth</div>
+          <div class="text-3xl font-extrabold mt-1">5 Shorts</div>
+          <p class="text-zinc-400 mt-2">Our most popular bundle for consistency.</p>
+          <ul class="mt-4 text-sm text-zinc-300 space-y-1">
+            <li>15–45s each</li>
+            <li>Goldn captions</li>
+            <li>Priority delivery</li>
+          </ul>
+          <a href="#contact" class="mt-6 inline-block px-4 py-2 rounded-xl bg-yellow-500 text-zinc-900 font-semibold hover:bg-yellow-400">Request bundle</a>
+        </div>
+        <div class="card rounded-2xl p-6 fade">
+          <div class="text-sm text-zinc-400">Cinematic</div>
+          <div class="text-3xl font-extrabold mt-1">Trailer</div>
+          <p class="text-zinc-400 mt-2">High‑impact launch or update trailer.</p>
+          <ul class="mt-4 text-sm text-zinc-300 space-y-1">
+            <li>30–60s runtime</li>
+            <li>SFX + motion</li>
+            <li>Title/logo animation</li>
+          </ul>
+          <a href="#contact" class="mt-6 inline-block px-4 py-2 rounded-xl border border-zinc-700 hover:bg-zinc-800">Get quote</a>
         </div>
       </div>
+    </div>
+  </section>
 
-      <!-- ACHIEVEMENTS -->
-      <div id="view-achievements" class="card hidden">
-        <div class="flex items-center justify-between mb-4">
-          <h2 class="text-lg font-semibold">Business Goals & Achievements</h2>
-          <button id="addAchBtn" class="btn">Add Achievement</button>
-        </div>
-        <div class="grid md:grid-cols-2 gap-4">
-          <div class="card">
-            <h3 class="font-medium mb-2">New Achievement</h3>
-            <input id="achTitle" class="input mb-2" placeholder="e.g., First 10 clients" />
-            <input id="achDate" type="date" class="input mb-2" />
-            <textarea id="achNotes" class="input h-20" placeholder="Notes"></textarea>
-            <button id="saveAch" class="btn mt-2">Save Achievement</button>
-          </div>
-          <div class="card">
-            <h3 class="font-medium mb-2">Timeline</h3>
-            <ul id="achList" class="space-y-2"></ul>
-          </div>
-        </div>
+  <!-- CONTACT -->
+  <section id="contact" class="py-20">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <div class="card rounded-2xl p-6">
+        <h2 class="text-2xl md:text-3xl font-bold">Let’s build something viral</h2>
+        <p class="text-zinc-400 mt-2">Tell me what you need and I’ll reply with a fast quote. Discord: <span class="text-zinc-200 font-medium">@brandonsdifferent</span></p>
+        <form action="https://formspree.io/f/xblddeka" method="POST" class="grid md:grid-cols-2 gap-3 mt-4">
+          <input class="rounded-xl bg-zinc-900 border border-zinc-800 px-3 py-2" name="name" placeholder="Name" required>
+          <input class="rounded-xl bg-zinc-900 border border-zinc-800 px-3 py-2" name="contact" placeholder="Email or Discord" required>
+          <select class="rounded-xl bg-zinc-900 border border-zinc-800 px-3 py-2 md:col-span-2" name="service">
+            <option>Roblox Short</option><option>Bundle (5 Shorts)</option><option>Trailer/Teaser</option><option>Caption Pack</option>
+          </select>
+          <textarea class="rounded-xl bg-zinc-900 border border-zinc-800 px-3 py-2 md:col-span-2" name="details" placeholder="Project details, links, style refs" rows="4"></textarea>
+          <button class="mt-1 md:col-span-2 px-5 py-3 rounded-xl bg-yellow-500 text-zinc-900 font-semibold hover:bg-yellow-400">Send</button>
+        </form>
       </div>
+      <p class="text-xs text-zinc-500 mt-3">*Aggregated across client channels and personal accounts; for social proof only.</p>
+    </div>
+  </section>
 
-      <!-- IDEAS -->
-      <div id="view-ideas" class="card hidden">
-        <div class="flex items-center justify-between mb-4">
-          <h2 class="text-lg font-semibold">Ideas & Notes</h2>
-          <button id="saveIdeasBtn" class="btn">Save</button>
-        </div>
-        <textarea id="ideasText" class="input h-64" placeholder="Game concepts, editing packages, marketing hooks, etc."></textarea>
+  <footer class="py-10 border-t border-zinc-800/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-zinc-400">
+      <span>© <span id="year"></span> Goldn Productions</span>
+      <div class="flex items-center gap-4">
+        <a href="https://hxvac.github.io/GoldnProductions/" class="hover:text-yellow-300">Live site</a>
+        <a href="https://hxvac.github.io/GoldnProductions/hub.html" class="hover:text-yellow-300">Private Hub</a>
       </div>
-    </section>
-
-    <footer class="text-xs text-zinc-500 mt-6 text-center">
-      Phase 1 build – stored in your browser via localStorage. Export regularly for backup.
-    </footer>
-  </div>
+    </div>
+  </footer>
 
   <script>
-    // ----------------------
-    // Simple State Handling
-    // ----------------------
-    const $ = (q) => document.querySelector(q);
-    const $$ = (q) => Array.from(document.querySelectorAll(q));
+    // Reveal on scroll
+    const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target)}}),{threshold:.15});
+    document.querySelectorAll('.fade').forEach(el=>io.observe(el));
+    document.getElementById('year').textContent=new Date().getFullYear();
 
-    const DEFAULT_DATA = {
-      profit: {
-        pendingRobux: 0,
-        balanceRobux: 0,
-        goalRobux: 100000,
-        usdPerRobux: 0.0035,
-        notes: "",
-        payouts: [] // {desc, amount, ts}
-      },
-      customers: [], // {name, discord, order, status, payment, notes}
-      content: { items: [], stats: { ttFollowers: 0, ttLikes: 0, ytSubs: 0, ytViews: 0 } },
-      tasks: [], // {id, title, due, priority, notes, done}
-      achievements: [], // {title, date, notes}
-      ideas: ""
-    };
-
-    const KEY = "rbh_data_v1";
-
-    function loadData() {
-      const raw = localStorage.getItem(KEY);
-      if (!raw) return JSON.parse(JSON.stringify(DEFAULT_DATA));
-      try { return Object.assign({}, DEFAULT_DATA, JSON.parse(raw)); } catch { return JSON.parse(JSON.stringify(DEFAULT_DATA)); }
-    }
-    function saveData() { localStorage.setItem(KEY, JSON.stringify(state)); }
-
-    let state = loadData();
-
-    // ----------------------
-    // Tabs
-    // ----------------------
-    function showTab(name) {
-      $$("[data-tab]").forEach(a => a.classList.remove("tab-active"));
-      const tab = document.querySelector(`[data-tab="${name}"]`);
-      if (tab) tab.classList.add("tab-active");
-
-      $$("[id^='view-']").forEach(v => v.classList.add("hidden"));
-      const view = $(`#view-${name}`);
-      if (view) {
-        view.classList.remove("hidden");
-        // tiny fade
-        view.classList.add("fade-enter");
-        setTimeout(() => view.classList.add("fade-enter-active"), 10);
-        setTimeout(() => view.classList.remove("fade-enter", "fade-enter-active"), 220);
-      }
-      location.hash = name;
-      renderAll();
-    }
-
-    $$("[data-tab]").forEach(a => a.addEventListener("click", (e) => { e.preventDefault(); showTab(a.dataset.tab); }));
-
-    window.addEventListener("hashchange", () => {
-      const name = location.hash.replace('#','') || 'profit';
-      showTab(name);
+    // Live members placeholder: change this manually or wire to API later
+    const liveCounter=document.getElementById('liveCounter');
+    const saved=localStorage.getItem('goldn_live_members');
+    let n=saved?Number(saved):357; // starter value — edit as needed
+    function render(){liveCounter.textContent=n.toLocaleString();}
+    render();
+    // Double‑click number to adjust quickly
+    liveCounter.addEventListener('dblclick',()=>{
+      const x=prompt('Set live group members:', n);
+      if(x!==null){n=Number(x)||n; localStorage.setItem('goldn_live_members', n); render();}
     });
-
-    // ----------------------
-    // Profit
-    // ----------------------
-    function renderProfit() {
-      const p = state.profit;
-      $("#pendingRobux").value = p.pendingRobux;
-      $("#balanceRobux").value = p.balanceRobux;
-      $("#goalRobux").value = p.goalRobux;
-      $("#usdPerRobux").value = p.usdPerRobux;
-      $("#profitNotes").value = p.notes || "";
-
-      const total = (Number(p.pendingRobux)||0) + (Number(p.balanceRobux)||0);
-      const usd = (Number(p.usdPerRobux)||0) * total;
-      $("#totalRobux").textContent = total.toLocaleString();
-      $("#approxUsd").textContent = `$${usd.toFixed(2)}`;
-
-      const goal = Math.max(1, Number(p.goalRobux)||1);
-      const pct = Math.min(100, Math.round((total/goal)*100));
-      $("#goalBar").style.width = pct + "%";
-      $("#goalPct").textContent = pct + "%";
-      $("#goalCaption").textContent = `${total.toLocaleString()} / ${goal.toLocaleString()} Robux`;
-
-      // payout log
-      const list = $("#payoutLog");
-      list.innerHTML = "";
-      p.payouts.slice().reverse().forEach((it, i) => {
-        const li = document.createElement('li');
-        li.className = "flex items-center justify-between gap-2";
-        const when = new Date(it.ts).toLocaleString();
-        li.innerHTML = `<span class="text-zinc-300">${it.desc}</span><span class="text-zinc-400">${it.amount} R$</span><span class="text-zinc-500 text-xs">${when}</span>`;
-        list.appendChild(li);
-      });
-    }
-
-    $("#saveProfit").addEventListener("click", () => {
-      state.profit.pendingRobux = Number($("#pendingRobux").value)||0;
-      state.profit.balanceRobux = Number($("#balanceRobux").value)||0;
-      state.profit.goalRobux = Number($("#goalRobux").value)||0;
-      state.profit.usdPerRobux = Number($("#usdPerRobux").value)||0;
-      saveData();
-      renderProfit();
-    });
-    $("#saveProfitNotes").addEventListener("click", () => {
-      state.profit.notes = $("#profitNotes").value;
-      saveData();
-      renderProfit();
-    });
-    $("#addPayout").addEventListener("click", () => {
-      const desc = $("#payoutDesc").value.trim();
-      const amount = Number($("#payoutAmount").value)||0;
-      if (!desc || !amount) return;
-      state.profit.payouts.push({ desc, amount, ts: Date.now() });
-      $("#payoutDesc").value = "";
-      $("#payoutAmount").value = "";
-      saveData();
-      renderProfit();
-    });
-
-    // ----------------------
-    // Customers
-    // ----------------------
-    function renderCustomers() {
-      const body = $("#customerBody");
-      body.innerHTML = "";
-      state.customers.forEach((c, idx) => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td class="px-4 py-3">${c.name||""}</td>
-          <td class="px-4 py-3 text-zinc-300">${c.discord||""}</td>
-          <td class="px-4 py-3">${c.order||""}</td>
-          <td class="px-4 py-3">
-            <span class="pill ${statusPillClass(c.status)}">${c.status||"Pending"}</span>
-          </td>
-          <td class="px-4 py-3">${c.payment||""}</td>
-          <td class="px-4 py-3 text-zinc-400">${c.notes||""}</td>
-          <td class="px-4 py-3">
-            <div class="flex gap-2">
-              <button class="btn-ghost" data-edit="${idx}">Edit</button>
-              <button class="btn-ghost" data-advance="${idx}">Next ▶</button>
-              <button class="btn-ghost text-red-400" data-del="${idx}">Delete</button>
-            </div>
-          </td>`;
-        body.appendChild(tr);
-      });
-
-      body.querySelectorAll('[data-del]').forEach(btn => btn.addEventListener('click', () => {
-        const i = Number(btn.dataset.del);
-        state.customers.splice(i,1); saveData(); renderCustomers();
-      }));
-      body.querySelectorAll('[data-advance]').forEach(btn => btn.addEventListener('click', () => {
-        const i = Number(btn.dataset.advance);
-        const order = ["Pending","Editing","Delivered","Archived"];
-        const cur = state.customers[i].status || "Pending";
-        const next = order[(order.indexOf(cur)+1) % order.length];
-        state.customers[i].status = next; saveData(); renderCustomers();
-      }));
-      body.querySelectorAll('[data-edit]').forEach(btn => btn.addEventListener('click', () => editCustomer(Number(btn.dataset.edit))));
-    }
-
-    function statusPillClass(status){
-      switch(status){
-        case 'Editing': return 'bg-amber-400/20 text-amber-300 border border-amber-400/30';
-        case 'Delivered': return 'bg-emerald-400/20 text-emerald-300 border border-emerald-400/30';
-        case 'Archived': return 'bg-zinc-700/50 text-zinc-300 border border-zinc-500/30';
-        default: return 'bg-blue-400/20 text-blue-300 border border-blue-400/30';
-      }
-    }
-
-    function addCustomerDialog(prefill = {}){
-      const name = prompt('Customer name:', prefill.name||''); if (name===null) return;
-      const discord = prompt('Discord (e.g., brandonsdifferent):', prefill.discord||''); if (discord===null) return;
-      const order = prompt('Order (e.g., 5 Shorts bundle):', prefill.order||''); if (order===null) return;
-      const status = prompt('Status (Pending / Editing / Delivered / Archived):', prefill.status||'Pending'); if (status===null) return;
-      const payment = prompt('Payment (Robux or $):', prefill.payment||''); if (payment===null) return;
-      const notes = prompt('Notes:', prefill.notes||''); if (notes===null) return;
-      return { name, discord, order, status, payment, notes };
-    }
-
-    function editCustomer(i){
-      const updated = addCustomerDialog(state.customers[i]);
-      if (!updated) return;
-      state.customers[i] = updated; saveData(); renderCustomers();
-    }
-
-    $("#addCustomerBtn").addEventListener("click", () => {
-      const c = addCustomerDialog();
-      if (!c) return;
-      state.customers.push(c); saveData(); renderCustomers();
-    });
-
-    // ----------------------
-    // Content
-    // ----------------------
-    function renderContent(){
-      // list
-      const ul = $("#contentList");
-      ul.innerHTML = "";
-      state.content.items.slice().reverse().forEach((it, idx) => {
-        const li = document.createElement('li');
-        li.className = 'flex items-start justify-between gap-3';
-        li.innerHTML = `
-          <div>
-            <a href="${it.link}" target="_blank" class="font-medium hover:underline">${it.title}</a>
-            <p class="text-zinc-400 text-xs">${it.notes||''}</p>
-          </div>
-          <div class="flex gap-2">
-            <button class="btn-ghost" data-editc="${idx}">Edit</button>
-            <button class="btn-ghost text-red-400" data-delc="${idx}">Delete</button>
-          </div>`;
-        ul.appendChild(li);
-      });
-
-      ul.querySelectorAll('[data-delc]').forEach(btn => btn.addEventListener('click', () => {
-        const i = Number(btn.dataset.delc);
-        const reversedIndex = state.content.items.length - 1 - i;
-        state.content.items.splice(reversedIndex,1); saveData(); renderContent();
-      }));
-      ul.querySelectorAll('[data-editc]').forEach(btn => btn.addEventListener('click', () => {
-        const i = Number(btn.dataset.editc);
-        const reversedIndex = state.content.items.length - 1 - i;
-        const cur = state.content.items[reversedIndex];
-        const title = prompt('Title:', cur.title); if (title===null) return;
-        const link = prompt('Link:', cur.link); if (link===null) return;
-        const notes = prompt('Notes:', cur.notes||''); if (notes===null) return;
-        state.content.items[reversedIndex] = { title, link, notes }; saveData(); renderContent();
-      }));
-
-      const s = state.content.stats;
-      $("#ttFollowers").value = s.ttFollowers||0;
-      $("#ttLikes").value = s.ttLikes||0;
-      $("#ytSubs").value = s.ytSubs||0;
-      $("#ytViews").value = s.ytViews||0;
-      $("#statsPreview").textContent = `TikTok: ${s.ttFollowers?.toLocaleString?.()||0} followers, ${s.ttLikes?.toLocaleString?.()||0} likes · YouTube: ${s.ytSubs?.toLocaleString?.()||0} subs, ${s.ytViews?.toLocaleString?.()||0} views (28d)`;
-    }
-
-    $("#saveContent").addEventListener('click', () => {
-      const title = $("#contentTitle").value.trim();
-      const link = $("#contentLink").value.trim();
-      const notes = $("#contentNotes").value.trim();
-      if (!title || !link) return;
-      state.content.items.push({ title, link, notes });
-      $("#contentTitle").value = $("#contentLink").value = $("#contentNotes").value = '';
-      saveData();
-      renderContent();
-    });
-
-    $("#addContentBtn").addEventListener('click', () => {
-      const title = prompt('Title:'); if (title===null) return;
-      const link = prompt('Link:'); if (link===null) return;
-      const notes = prompt('Notes:'); if (notes===null) return;
-      state.content.items.push({ title, link, notes }); saveData(); renderContent();
-    });
-
-    $("#saveStats").addEventListener('click', () => {
-      state.content.stats = {
-        ttFollowers: Number($("#ttFollowers").value)||0,
-        ttLikes: Number($("#ttLikes").value)||0,
-        ytSubs: Number($("#ytSubs").value)||0,
-        ytViews: Number($("#ytViews").value)||0,
-      };
-      saveData(); renderContent();
-    });
-
-    // ----------------------
-    // Tasks
-    // ----------------------
-    function renderTasks(){
-      const ul = $("#taskList");
-      ul.innerHTML = '';
-      const now = new Date();
-      state.tasks.sort((a,b) => (a.done === b.done) ? ((a.due||'') > (b.due||'') ? 1 : -1) : (a.done?1:-1));
-      state.tasks.forEach(t => {
-        const li = document.createElement('li');
-        const overdue = !t.done && t.due && (new Date(t.due) < new Date(now.toDateString()));
-        li.className = 'flex items-start justify-between gap-3 p-3 rounded-xl border ' + (overdue ? 'border-red-500/40 bg-red-900/10' : 'border-zinc-800 bg-zinc-900/40');
-        li.innerHTML = `
-          <div class="flex items-start gap-3">
-            <input type="checkbox" ${t.done?'checked':''} data-done="${t.id}" class="mt-1" />
-            <div>
-              <div class="flex items-center gap-2">
-                <span class="font-medium">${t.title}</span>
-                <span class="pill ${priorityPill(t.priority)}">${t.priority}</span>
-                ${t.due ? `<span class="text-xs text-zinc-400">Due: ${t.due}</span>` : ''}
-              </div>
-              ${t.notes ? `<p class="text-zinc-400 text-sm mt-1">${t.notes}</p>` : ''}
-            </div>
-          </div>
-          <div class="flex gap-2">
-            <button class="btn-ghost" data-editt="${t.id}">Edit</button>
-            <button class="btn-ghost text-red-400" data-delt="${t.id}">Delete</button>
-          </div>`;
-        ul.appendChild(li);
-      });
-
-      ul.querySelectorAll('[data-done]').forEach(cb => cb.addEventListener('change', () => {
-        const id = cb.dataset.done;
-        const item = state.tasks.find(x => String(x.id)===String(id));
-        if (item){ item.done = cb.checked; saveData(); renderTasks(); }
-      }));
-      ul.querySelectorAll('[data-delt]').forEach(btn => btn.addEventListener('click', () => {
-        const id = btn.dataset.delt;
-        state.tasks = state.tasks.filter(x => String(x.id)!==String(id)); saveData(); renderTasks();
-      }));
-      ul.querySelectorAll('[data-editt]').forEach(btn => btn.addEventListener('click', () => editTask(btn.dataset.editt)));
-    }
-
-    function priorityPill(p){
-      if (p==='High') return 'bg-red-400/20 text-red-300 border border-red-400/40';
-      if (p==='Medium') return 'bg-amber-400/20 text-amber-300 border border-amber-400/40';
-      return 'bg-zinc-600/30 text-zinc-200 border border-zinc-500/30';
-    }
-
-    function addTask(){
-      const title = $("#taskTitle").value.trim(); if (!title) return;
-      const due = $("#taskDue").value;
-      const priority = $("#taskPriority").value;
-      const notes = $("#taskNotes").value.trim();
-      state.tasks.push({ id: crypto.randomUUID(), title, due, priority, notes, done:false });
-      $("#taskTitle").value = $("#taskDue").value = $("#taskNotes").value = '';
-      $("#taskPriority").value = 'Low';
-      saveData(); renderTasks();
-    }
-
-    function editTask(id){
-      const t = state.tasks.find(x => String(x.id)===String(id));
-      if (!t) return;
-      const title = prompt('Task title:', t.title); if (title===null) return;
-      const due = prompt('Due date (YYYY-MM-DD):', t.due||''); if (due===null) return;
-      const priority = prompt('Priority (Low/Medium/High):', t.priority||'Low'); if (priority===null) return;
-      const notes = prompt('Notes:', t.notes||''); if (notes===null) return;
-      Object.assign(t, { title, due, priority, notes }); saveData(); renderTasks();
-    }
-
-    $("#saveTask").addEventListener('click', addTask);
-    $("#addTaskBtn").addEventListener('click', () => {
-      const title = prompt('Task title:'); if (title===null) return;
-      const due = prompt('Due date (YYYY-MM-DD):', ''); if (due===null) return;
-      const priority = prompt('Priority (Low/Medium/High):', 'Low'); if (priority===null) return;
-      const notes = prompt('Notes:', ''); if (notes===null) return;
-      state.tasks.push({ id: crypto.randomUUID(), title, due, priority, notes, done:false });
-      saveData(); renderTasks();
-    });
-
-    // ----------------------
-    // Achievements
-    // ----------------------
-    function renderAchievements(){
-      const ul = $("#achList");
-      ul.innerHTML = '';
-      const items = state.achievements.slice().sort((a,b) => (a.date||'') > (b.date||'') ? 1 : -1);
-      items.forEach(a => {
-        const li = document.createElement('li');
-        li.className = 'p-3 rounded-xl border border-zinc-800 bg-zinc-900/40';
-        li.innerHTML = `
-          <div class="flex items-center justify-between">
-            <div>
-              <div class="font-medium">${a.title}</div>
-              ${a.notes ? `<div class="text-sm text-zinc-400">${a.notes}</div>` : ''}
-            </div>
-            ${a.date ? `<div class="text-xs text-zinc-400">${a.date}</div>` : ''}
-          </div>`;
-        ul.appendChild(li);
-      });
-    }
-
-    function addAchievement(){
-      const title = $("#achTitle").value.trim(); if (!title) return;
-      const date = $("#achDate").value;
-      const notes = $("#achNotes").value.trim();
-      state.achievements.push({ title, date, notes });
-      $("#achTitle").value = $("#achDate").value = $("#achNotes").value = '';
-      saveData(); renderAchievements();
-    }
-
-    $("#saveAch").addEventListener('click', addAchievement);
-    $("#addAchBtn").addEventListener('click', () => {
-      const title = prompt('Achievement title:'); if (title===null) return;
-      const date = prompt('Date (YYYY-MM-DD):', ''); if (date===null) return;
-      const notes = prompt('Notes:', ''); if (notes===null) return;
-      state.achievements.push({ title, date, notes }); saveData(); renderAchievements();
-    });
-
-    // ----------------------
-    // Ideas
-    // ----------------------
-    function renderIdeas(){ $("#ideasText").value = state.ideas || ''; }
-    $("#saveIdeasBtn").addEventListener('click', () => { state.ideas = $("#ideasText").value; saveData(); });
-
-    // ----------------------
-    // Export / Import / Reset
-    // ----------------------
-    $("#exportBtn").addEventListener('click', () => {
-      const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url; a.download = `rbh-backup-${new Date().toISOString().slice(0,10)}.json`;
-      document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
-    });
-
-    $("#importInput").addEventListener('change', (e) => {
-      const file = e.target.files[0]; if (!file) return;
-      const reader = new FileReader();
-      reader.onload = () => {
-        try {
-          const data = JSON.parse(reader.result);
-          state = Object.assign({}, DEFAULT_DATA, data);
-          saveData();
-          renderAll();
-          alert('Import complete.');
-        } catch {
-          alert('Invalid JSON.');
-        }
-      };
-      reader.readAsText(file);
-      e.target.value = '';
-    });
-
-    $("#resetBtn").addEventListener('click', () => {
-      if (!confirm('Reset all data? This clears your localStorage for this hub.')) return;
-      state = JSON.parse(JSON.stringify(DEFAULT_DATA));
-      saveData(); renderAll();
-    });
-
-    // ----------------------
-    // Render All
-    // ----------------------
-    function renderAll(){
-      renderProfit();
-      renderCustomers();
-      renderContent();
-      renderTasks();
-      renderAchievements();
-      renderIdeas();
-    }
-
-    // Boot
-    const initialTab = location.hash.replace('#','') || 'customers';
-    showTab(initialTab);
   </script>
 </body>
 </html>
