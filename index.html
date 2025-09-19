@@ -176,5 +176,46 @@
     let n=saved?Number(saved):1; function render(){liveCounter.textContent=n.toLocaleString();}
     render(); liveCounter.addEventListener('dblclick',()=>{const x=prompt('Set live group members:', n); if(x!==null){n=Number(x)||n; localStorage.setItem('goldn_live_members', n); render();}});
   </script>
+  <script>
+    // Replace hero right column (video/trust bars) with a progress bar
+    (function(){
+      const col = document.querySelector('.hero-gradient .lg\:col-span-5');
+      if(!col) return;
+      // slots data (editable, persisted locally)
+      const LS_T = 'goldn_slots_total';
+      const LS_F = 'goldn_slots_filled';
+      const total = Number(localStorage.getItem(LS_T)) || 10;
+      const filled = Number(localStorage.getItem(LS_F)) || 3;
+      const pct = Math.max(0, Math.min(100, Math.round((filled/total)*100)));
+      col.innerHTML = `
+        <div class="card rounded-3xl p-6">
+          <h3 class="text-lg font-semibold">Order Slots — This Week</h3>
+          <div class="mt-3 h-3 rounded-full bg-zinc-800 overflow-hidden">
+            <div id="slotsBar" class="h-full bg-gradient-to-r from-amber-400 to-yellow-600" style="width:${pct}%"></div>
+          </div>
+          <div class="mt-2 flex items-center justify-between text-sm text-zinc-300">
+            <span><span id="slotsFilled">${filled}</span>/<span id="slotsTotal">${total}</span> filled</span>
+            <button id="editSlots" class="text-xs px-2 py-1 rounded-lg border border-zinc-700 hover:bg-zinc-800">Edit</button>
+          </div>
+          <p class="text-xs text-zinc-500 mt-3">Order now to reserve your spot.</p>
+          <a href="https://discord.gg/dh2azNrU6q" target="_blank" rel="noopener" class="mt-4 inline-block px-4 py-2 rounded-xl bg-yellow-500 text-zinc-900 font-semibold hover:bg-yellow-400">Order</a>
+        </div>`;
+      const bar = col.querySelector('#slotsBar');
+      const fEl = col.querySelector('#slotsFilled');
+      const tEl = col.querySelector('#slotsTotal');
+      const btn = col.querySelector('#editSlots');
+      btn.addEventListener('click', () => {
+        const nf = prompt('How many slots are filled?', fEl.textContent);
+        const nt = prompt('Total slots available this week?', tEl.textContent);
+        const f = Math.max(0, Number(nf)||0);
+        const t = Math.max(1, Number(nt)||1);
+        localStorage.setItem(LS_F, String(f));
+        localStorage.setItem(LS_T, String(t));
+        fEl.textContent = f;
+        tEl.textContent = t;
+        bar.style.width = Math.round((f/t)*100) + '%';
+      });
+    })();
+  </script>
 </body>
 </html>
