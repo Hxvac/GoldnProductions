@@ -60,12 +60,11 @@
             <a href="#pricing" class="px-5 py-3 rounded-xl border border-zinc-700 bg-zinc-900 hover:bg-zinc-800">View Pricing</a>
           </div>
 
-          <!-- REPLACED: Stats → Progress bar -->
+          <!-- Order Slots (progress bar) -->
           <div id="orderSlots" class="mt-8">
             <div class="card rounded-2xl p-5">
               <div class="flex items-center justify-between gap-3">
                 <h3 class="text-lg font-semibold">Order Slots — This Week</h3>
-                <button id="editSlotsHero" class="text-xs px-2 py-1 rounded-lg border border-zinc-700 hover:bg-zinc-800">Edit</button>
               </div>
               <div class="mt-3 h-3 rounded-full bg-zinc-800 overflow-hidden">
                 <div id="slotsBarHero" class="h-full bg-gradient-to-r from-amber-400 to-yellow-600" style="width:0%"></div>
@@ -79,7 +78,7 @@
           </div>
         </div>
 
-        <!-- Right (kept) -->
+        <!-- Right: trust bar + logos -->
         <div class="lg:col-span-5">
           <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center mt-6">
             <div class="p-4 rounded-xl bg-zinc-900/50">
@@ -239,34 +238,20 @@
     document.querySelectorAll('.fade').forEach(el=>io.observe(el));
     document.getElementById('year').textContent=new Date().getFullYear();
 
-    // Order Slots (left hero) — persisted locally
-    (function(){
-      const LS_T='goldn_slots_total', LS_F='goldn_slots_filled';
-      let total = Number(localStorage.getItem(LS_T)) || 10;
-      let filled = Number(localStorage.getItem(LS_F)) || 3;
+    // ---- Order Slots (left hero) ----
+    // Edit these two numbers to update the bar:
+    const TOTAL_SLOTS = 10;
+    const FILLED_SLOTS = 5;
 
+    (function(){
       const bar = document.getElementById('slotsBarHero');
       const filledEl = document.getElementById('slotsFilledHero');
       const totalEl  = document.getElementById('slotsTotalHero');
 
-      function render(){
-        const pct = Math.max(0, Math.min(100, Math.round((filled/total)*100)));
-        bar.style.width = pct + '%';
-        filledEl.textContent = filled;
-        totalEl.textContent = total;
-      }
-      render();
-
-      document.getElementById('editSlotsHero').addEventListener('click', ()=>{
-        const nf = prompt('How many slots are filled?', filled);
-        const nt = prompt('Total slots available this week?', total);
-        const f = Math.max(0, Number(nf)||0);
-        const t = Math.max(1, Number(nt)||1);
-        filled=f; total=t;
-        localStorage.setItem(LS_F, String(f));
-        localStorage.setItem(LS_T, String(t));
-        render();
-      });
+      const pct = Math.max(0, Math.min(100, Math.round((FILLED_SLOTS / TOTAL_SLOTS) * 100)));
+      bar.style.width = pct + '%';
+      filledEl.textContent = FILLED_SLOTS;
+      totalEl.textContent = TOTAL_SLOTS;
     })();
   </script>
 </body>
