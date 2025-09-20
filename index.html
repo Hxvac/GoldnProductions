@@ -47,6 +47,25 @@
     @media (max-width: 767px){
       .arrow{display:none}
     }
+
+    /* ---------- On-load entrance animations ---------- */
+    @keyframes fadeUp {
+      0% { opacity:0; transform:translateY(20px) }
+      100%{ opacity:1; transform:translateY(0) }
+    }
+    .animate-fadeUp { opacity:0; animation:fadeUp .8s ease-out forwards }
+    .animate-delay-0{ animation-delay: .0s }
+    .animate-delay-1{ animation-delay: .15s }
+    .animate-delay-2{ animation-delay: .30s }
+    .animate-delay-3{ animation-delay: .45s }
+    .animate-delay-4{ animation-delay: .60s }
+    .animate-delay-5{ animation-delay: .75s }
+
+    /* Respect user preference */
+    @media (prefers-reduced-motion: reduce){
+      .marquee-track{animation:none}
+      .fade,.step-anim,.animate-fadeUp{transition:none; animation:none; opacity:1; transform:none}
+    }
   </style>
 </head>
 <body class="bg-black text-zinc-100 selection:bg-yellow-400/30">
@@ -77,21 +96,21 @@
       <div class="grid lg:grid-cols-12 gap-8 items-center">
         <!-- Left -->
         <div class="lg:col-span-7">
-          <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
+          <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight animate-fadeUp animate-delay-0">
             Roblox Shorts that
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-600">stop the scroll</span>.
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-600 animate-fadeUp animate-delay-1">stop the scroll</span>.
           </h1>
-          <p class="mt-4 text-zinc-300 max-w-2xl">
+          <p class="mt-4 text-zinc-300 max-w-2xl animate-fadeUp animate-delay-2">
             I create high-retention shorts, trailers, and promo edits for Roblox creators and studios. Clean captions, punchy cuts, viral pacing — delivered fast.
           </p>
 
-          <div class="mt-6 flex flex-wrap gap-3">
+          <div class="mt-6 flex flex-wrap gap-3 animate-fadeUp animate-delay-3">
             <a href="#work" class="px-5 py-3 rounded-xl bg-yellow-500 text-zinc-900 font-semibold hover:bg-yellow-400">See Work</a>
             <a href="#pricing" class="px-5 py-3 rounded-xl border border-zinc-700 bg-zinc-900 hover:bg-zinc-800">View Pricing</a>
           </div>
 
           <!-- Order Slots -->
-          <div id="orderSlots" class="mt-8">
+          <div id="orderSlots" class="mt-8 animate-fadeUp animate-delay-4">
             <div class="card rounded-2xl p-5">
               <div class="flex items-center justify-between gap-3">
                 <h3 class="text-lg font-semibold">Order Slots — This Week</h3>
@@ -108,22 +127,22 @@
           </div>
         </div>
 
-        <!-- Right trust -->
+        <!-- Right trust (equal height + staggered) -->
         <div class="lg:col-span-5">
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center mt-6">
-            <div class="p-4 rounded-xl bg-zinc-900/50">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center mt-6 auto-rows-fr">
+            <div class="p-4 rounded-xl bg-zinc-900/50 h-full flex flex-col items-center justify-center animate-fadeUp animate-delay-2">
               <div class="text-2xl font-bold text-yellow-400">85M+</div>
               <div class="text-sm text-zinc-400">Contributed Views</div>
             </div>
-            <div class="p-4 rounded-xl bg-zinc-900/50">
+            <div class="p-4 rounded-xl bg-zinc-900/50 h-full flex flex-col items-center justify-center animate-fadeUp animate-delay-3">
               <div class="text-2xl font-bold text-yellow-400">&lt;24h</div>
               <div class="text-sm text-zinc-400">Turnaround</div>
             </div>
-            <div class="p-4 rounded-xl bg-zinc-900/50">
+            <div class="p-4 rounded-xl bg-zinc-900/50 h-full flex flex-col items-center justify-center animate-fadeUp animate-delay-4">
               <div class="text-2xl font-bold text-yellow-400">1</div>
               <div class="text-sm text-zinc-400">Live Group Member</div>
             </div>
-            <div class="p-4 rounded-xl bg-zinc-900/50">
+            <div class="p-4 rounded-xl bg-zinc-900/50 h-full flex flex-col items-center justify-center animate-fadeUp animate-delay-5">
               <div class="text-2xl font-bold text-yellow-400">5★</div>
               <div class="text-sm text-zinc-400">Client Rating</div>
             </div>
@@ -213,11 +232,11 @@
   <!-- PROCESS (side-to-side) -->
   <section id="process" class="py-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 text-center">
-      <h2 class="text-2xl md:text-3xl font-bold mb-10">My Editing Process</h2>
+      <h2 class="text-2xl md:text-3xl font-bold mb-10 animate-fadeUp animate-delay-0">My Editing Process</h2>
 
       <div class="flex flex-col md:flex-row items-stretch justify-center gap-6">
         <!-- Step 1 -->
-        <div class="card rounded-2xl p-6 w-full md:w-1/3 step-anim">
+        <div class="card rounded-2xl p-6 w-full md:w-1/3 step-anim animate-fadeUp animate-delay-1">
           <h3 class="font-semibold text-lg">1. Finding the Hook</h3>
           <p class="text-zinc-400 mt-2 text-sm">
             I start by picking the best moment to grab attention and planning out how captions and pacing will flow.
@@ -228,7 +247,7 @@
         <div class="arrow text-yellow-400 hidden md:flex items-center">→</div>
 
         <!-- Step 2 -->
-        <div class="card rounded-2xl p-6 w-full md:w-1/3 step-anim">
+        <div class="card rounded-2xl p-6 w-full md:w-1/3 step-anim animate-fadeUp animate-delay-2">
           <h3 class="font-semibold text-lg">2. Editing the Magic</h3>
           <p class="text-zinc-400 mt-2 text-sm">
             This is where I cut, sync to music, add captions, zooms, and effects to make everything smooth and exciting.
@@ -239,7 +258,7 @@
         <div class="arrow text-yellow-400 hidden md:flex items-center">→</div>
 
         <!-- Step 3 -->
-        <div class="card rounded-2xl p-6 w-full md:w-1/3 step-anim">
+        <div class="card rounded-2xl p-6 w-full md:w-1/3 step-anim animate-fadeUp animate-delay-3">
           <h3 class="font-semibold text-lg">3. Delivery</h3>
           <p class="text-zinc-400 mt-2 text-sm">
             I send the finished short back to you, fully optimized for TikTok or YouTube. Fast turnaround, with revisions if needed.
@@ -252,10 +271,10 @@
   <!-- PRICING -->
   <section id="pricing" class="py-20 shine">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
-      <h2 class="text-2xl md:text-3xl font-bold mb-8">Pricing</h2>
+      <h2 class="text-2xl md:text-3xl font-bold mb-8 animate-fadeUp animate-delay-0">Pricing</h2>
       <div class="grid md:grid-cols-3 gap-5">
         <!-- 1 -->
-        <div class="card rounded-2xl p-6 fade">
+        <div class="card rounded-2xl p-6 fade animate-fadeUp animate-delay-1">
           <div class="text-sm text-zinc-400">Starter</div>
           <div class="text-3xl font-extrabold mt-1">1 Short</div>
           <div class="mt-2 text-2xl font-bold text-yellow-400">$4 <span class="text-zinc-400 text-base">/ 1,200 Robux</span></div>
@@ -267,7 +286,7 @@
         </div>
 
         <!-- 5 (Most Popular) -->
-        <div class="card rounded-2xl p-6 ringGlow fade relative">
+        <div class="card rounded-2xl p-6 ringGlow fade relative animate-fadeUp animate-delay-2">
           <span class="absolute -top-3 left-1/2 -translate-x-1/2 text-xs px-3 py-1 rounded-full bg-yellow-500 text-zinc-900 font-semibold shadow">Most Popular</span>
           <div class="text-sm text-zinc-400">Growth</div>
           <div class="text-3xl font-extrabold mt-1">5 Shorts</div>
@@ -280,7 +299,7 @@
         </div>
 
         <!-- 10 -->
-        <div class="card rounded-2xl p-6 fade">
+        <div class="card rounded-2xl p-6 fade animate-fadeUp animate-delay-3">
           <div class="text-sm text-zinc-400">Standard</div>
           <div class="text-3xl font-extrabold mt-1">10 Shorts</div>
           <div class="mt-2 text-2xl font-bold text-yellow-400">$40 <span class="text-zinc-400 text-base">/ 12,000 Robux</span></div>
@@ -297,7 +316,7 @@
   <!-- CONTACT -->
   <section id="contact" class="py-20">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center">
-      <div class="card rounded-2xl p-8">
+      <div class="card rounded-2xl p-8 animate-fadeUp animate-delay-0">
         <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">ORDER ON DISCORD:</h2>
         <p class="text-zinc-400 mt-3">Fast quotes, bundles, and delivery status handled in the server.</p>
         <a href="https://discord.gg/dh2azNrU6q" target="_blank" rel="noopener" class="mt-5 inline-block px-6 py-3 rounded-xl bg-yellow-500 text-zinc-900 font-semibold hover:bg-yellow-400">Order</a>
@@ -326,7 +345,7 @@
   </footer>
 
   <script>
-    // Reveal on scroll
+    // Reveal on scroll (for .fade and .step-anim sections)
     const io=new IntersectionObserver((entries)=>entries.forEach(e=>{
       if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); }
     }),{threshold:.15});
@@ -347,8 +366,8 @@
 
       const pct = Math.max(0, Math.min(100, Math.round((FILLED_SLOTS / TOTAL_SLOTS) * 100)));
       bar.style.width = pct + '%';
-      filledEl.textContent = FILLED_SLOTS;
-      totalEl.textContent = TOTAL_SLOTS;
+      if(filledEl) filledEl.textContent = FILLED_SLOTS;
+      if(totalEl)  totalEl.textContent  = TOTAL_SLOTS;
     })();
   </script>
 </body>
