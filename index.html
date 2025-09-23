@@ -58,13 +58,11 @@
     .animate-delay-2{ animation-delay:.30s } .animate-delay-3{ animation-delay:.45s }
     .animate-delay-4{ animation-delay:.60s } .animate-delay-5{ animation-delay:.75s }
 
-    /* Respect user preference */
     @media (prefers-reduced-motion: reduce){
       .marquee-track{animation:none}
       .fade,.animate-fadeUp{transition:none; animation:none; opacity:1; transform:none}
     }
 
-    /* Sticky mobile Order button (safe-area aware) */
     .sticky-order{
       position:fixed; right:1rem; bottom:calc(1rem + env(safe-area-inset-bottom)); z-index:60;
       padding:.85rem 1.1rem; border-radius:1rem; font-weight:700;
@@ -85,7 +83,7 @@
     "offers":[
       {"@type":"Offer","name":"Starter (1 Short)","price":"4","priceCurrency":"USD"},
       {"@type":"Offer","name":"Growth (5 Shorts)","price":"18","priceCurrency":"USD"},
-      {"@type":"Offer","name":"Standard (10 Shorts)","price":"40","priceCurrency":"USD"}
+      {"@type":"Offer","name":"Standard (10 Shorts)","price":"34","priceCurrency":"USD"}
     ]
   }
   </script>
@@ -120,7 +118,6 @@
           <span class="font-semibold tracking-tight">Goldn Productions</span>
         </a>
 
-        <!-- Desktop links -->
         <div class="hidden md:flex items-center gap-6 text-sm">
           <a href="#work" class="hover:text-yellow-300">Work</a>
           <a href="#process" class="hover:text-yellow-300">Process</a>
@@ -131,7 +128,6 @@
           <a href="https://discord.gg/dh2azNrU6q" target="_blank" rel="noopener" class="ml-1 px-4 py-2 rounded-xl ringGlow bg-zinc-900 border border-yellow-500/30 hover:bg-zinc-800">Order</a>
         </div>
 
-        <!-- Mobile menu button -->
         <button id="menuBtn" class="md:hidden inline-flex items-center justify-center p-2 rounded-lg border border-zinc-700 hover:bg-zinc-800"
                 aria-label="Open menu" aria-expanded="false">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -140,7 +136,6 @@
         </button>
       </div>
 
-      <!-- Mobile drawer -->
       <div id="mobileMenu" class="hidden md:hidden mt-2 glass border border-zinc-800 rounded-2xl p-3">
         <a class="block px-3 py-2 rounded-lg hover:bg-zinc-800" href="#work">Work</a>
         <a class="block px-3 py-2 rounded-lg hover:bg-zinc-800" href="#process">Process</a>
@@ -160,7 +155,6 @@
     <section class="hero-gradient pt-32 pb-16">
       <div class="max-w-7xl mx-auto px-4 sm:px-6">
         <div class="grid lg:grid-cols-12 gap-8 items-center">
-          <!-- Left -->
           <div class="lg:col-span-7">
             <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight animate-fadeUp animate-delay-0">
               Roblox Shorts that
@@ -175,7 +169,6 @@
               <a href="#pricing" class="px-5 py-3 rounded-xl border border-zinc-700 bg-zinc-900 hover:bg-zinc-800">View Pricing</a>
             </div>
 
-            <!-- Order Slots -->
             <div id="orderSlots" class="mt-8 animate-fadeUp animate-delay-4">
               <div class="card rounded-2xl p-5">
                 <div class="flex items-center justify-between gap-3">
@@ -194,7 +187,6 @@
             </div>
           </div>
 
-          <!-- Right trust (equal height + staggered) -->
           <div class="lg:col-span-5">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center mt-6 auto-rows-fr">
               <div class="p-4 rounded-xl bg-zinc-900/50 h-full flex flex-col items-center justify-center animate-fadeUp animate-delay-2">
@@ -218,7 +210,6 @@
         </div>
       </div>
 
-      <!-- Marquee -->
       <div class="mt-12 py-4 border-t border-zinc-800/60">
         <div class="marquee text-zinc-400 text-sm">
           <div class="marquee-track">
@@ -241,9 +232,8 @@
           .phone-iframe{width:100%;height:100%;border:0}
         </style>
 
-        <!-- Center cards & keep nice width -->
         <div class="grid md:grid-cols-3 gap-5 place-items-center">
-          <!-- Item 1 -->
+          <!-- Items 1–6 (unchanged except for your new links) -->
           <article class="card rounded-2xl overflow-hidden fade work-wrap w-full max-w-[24rem]">
             <div class="phone-frame">
               <iframe class="phone-iframe"
@@ -261,7 +251,6 @@
             </div>
           </article>
 
-          <!-- Item 2 -->
           <article class="card rounded-2xl overflow-hidden fade work-wrap w-full max-w-[24rem]">
             <div class="phone-frame">
               <iframe class="phone-iframe"
@@ -279,7 +268,6 @@
             </div>
           </article>
 
-          <!-- Item 3 -->
           <article class="card rounded-2xl overflow-hidden fade work-wrap w-full max-w-[24rem]">
             <div class="phone-frame">
               <iframe class="phone-iframe"
@@ -297,7 +285,6 @@
             </div>
           </article>
 
-          <!-- Item 4 (new) -->
           <article class="card rounded-2xl overflow-hidden fade work-wrap w-full max-w-[24rem]">
             <div class="phone-frame">
               <iframe class="phone-iframe"
@@ -315,7 +302,6 @@
             </div>
           </article>
 
-          <!-- Item 5 (new) -->
           <article class="card rounded-2xl overflow-hidden fade work-wrap w-full max-w-[24rem]">
             <div class="phone-frame">
               <iframe class="phone-iframe"
@@ -333,7 +319,6 @@
             </div>
           </article>
 
-          <!-- Item 6 (new) -->
           <article class="card rounded-2xl overflow-hidden fade work-wrap w-full max-w-[24rem]">
             <div class="phone-frame">
               <iframe class="phone-iframe"
@@ -387,6 +372,7 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6">
         <h2 class="text-2xl md:text-3xl font-bold mb-8 animate-fadeUp animate-delay-0">Pricing</h2>
         <div class="grid md:grid-cols-3 gap-5">
+          <!-- Starter -->
           <div class="card rounded-2xl p-6 animate-fadeUp animate-delay-1">
             <div class="text-sm text-zinc-400">Starter</div>
             <div class="text-3xl font-extrabold mt-1">1 Short</div>
@@ -398,8 +384,8 @@
             <a href="https://discord.gg/dh2azNrU6q" target="_blank" rel="noopener" class="mt-6 inline-block px-4 py-2 rounded-xl border border-zinc-700 hover:bg-zinc-800">Order on Discord</a>
           </div>
 
-          <div class="card rounded-2xl p-6 ringGlow relative animate-fadeUp animate-delay-2">
-            <span class="absolute -top-3 left-1/2 -translate-x-1/2 text-xs px-3 py-1 rounded-full bg-yellow-500 text-zinc-900 font-semibold shadow">Most Popular</span>
+          <!-- Growth -->
+          <div class="card rounded-2xl p-6 animate-fadeUp animate-delay-2">
             <div class="text-sm text-zinc-400">Growth</div>
             <div class="text-3xl font-extrabold mt-1">5 Shorts</div>
             <div class="mt-2 text-2xl font-bold text-yellow-400">$18 <span class="text-zinc-400 text-base">/ 5,000 Robux</span></div>
@@ -407,18 +393,20 @@
             <ul class="mt-4 text-sm text-zinc-300 space-y-1">
               <li>15–45s each</li><li>Goldn captions</li><li>Priority delivery</li>
             </ul>
-            <a href="https://discord.gg/dh2azNrU6q" target="_blank" rel="noopener" class="mt-6 inline-block px-4 py-2 rounded-xl bg-yellow-500 text-zinc-900 font-semibold hover:bg-yellow-400">Order on Discord</a>
+            <a href="https://discord.gg/dh2azNrU6q" target="_blank" rel="noopener" class="mt-6 inline-block px-4 py-2 rounded-xl border border-zinc-700 hover:bg-zinc-800">Order on Discord</a>
           </div>
 
-          <div class="card rounded-2xl p-6 animate-fadeUp animate-delay-3">
+          <!-- Standard (Best Value) -->
+          <div class="card rounded-2xl p-6 ringGlow relative animate-fadeUp animate-delay-3">
+            <span class="absolute -top-3 left-1/2 -translate-x-1/2 text-xs px-3 py-1 rounded-full bg-yellow-500 text-zinc-900 font-semibold shadow">Best Value</span>
             <div class="text-sm text-zinc-400">Standard</div>
             <div class="text-3xl font-extrabold mt-1">10 Shorts</div>
-            <div class="mt-2 text-2xl font-bold text-yellow-400">$40 <span class="text-zinc-400 text-base">/ 12,000 Robux</span></div>
-            <p class="text-zinc-400 mt-2">Perfect for steady growth.</p>
+            <div class="mt-2 text-2xl font-bold text-yellow-400">$34 <span class="text-zinc-400 text-base">/ 9,500 Robux</span></div>
+            <p class="text-zinc-400 mt-2">Bulk discount for serious growth.</p>
             <ul class="mt-4 text-sm text-zinc-300 space-y-1">
               <li>15–45s each</li><li>Goldn captions</li><li>Priority delivery</li>
             </ul>
-            <a href="https://discord.gg/dh2azNrU6q" target="_blank" rel="noopener" class="mt-6 inline-block px-4 py-2 rounded-xl border border-zinc-700 hover:bg-zinc-800">Order on Discord</a>
+            <a href="https://discord.gg/dh2azNrU6q" target="_blank" rel="noopener" class="mt-6 inline-block px-4 py-2 rounded-xl bg-yellow-500 text-zinc-900 font-semibold hover:bg-yellow-400">Order on Discord</a>
           </div>
         </div>
       </div>
@@ -432,7 +420,6 @@
         </div>
 
         <div class="grid md:grid-cols-2 gap-5 auto-rows-fr">
-          <!-- Spireblox -->
           <article class="card rounded-2xl p-6 animate-fadeUp animate-delay-1 h-full flex flex-col">
             <div class="flex items-center justify-between">
               <div>
@@ -450,7 +437,6 @@
             </blockquote>
           </article>
 
-          <!-- Whizz -->
           <article class="card rounded-2xl p-6 animate-fadeUp animate-delay-2 h-full flex flex-col">
             <div class="flex items-center justify-between">
               <div>
@@ -503,7 +489,6 @@
     </div>
   </footer>
 
-  <!-- Sticky mobile Order button -->
   <a href="https://discord.gg/dh2azNrU6q" target="_blank" rel="noopener"
      class="md:hidden sticky-order bg-yellow-500 text-zinc-900 hover:bg-yellow-400">
     Order
@@ -519,7 +504,7 @@
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Order Slots (edit these anytime)
+    // Order Slots
     const TOTAL_SLOTS = 10;
     const FILLED_SLOTS = 5;
     (function(){
@@ -532,7 +517,7 @@
       if(totalEl)  totalEl.textContent  = TOTAL_SLOTS;
     })();
 
-    // Mobile menu toggle with aria-expanded
+    // Mobile menu toggle
     const menuBtn = document.getElementById('menuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     if(menuBtn && mobileMenu){
