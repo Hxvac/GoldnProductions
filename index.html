@@ -68,6 +68,8 @@
       padding:.85rem 1.1rem; border-radius:1rem; font-weight:700;
       box-shadow:0 10px 30px rgba(253,224,71,.25);
     }
+    .phone-frame{aspect-ratio:9/16;background:#000;border-radius:1rem;overflow:hidden;width:100%;max-width:22rem;margin-inline:auto}
+    .phone-iframe{width:100%;height:100%;border:0}
   </style>
 </head>
 <body class="bg-black text-zinc-100 selection:bg-yellow-400/30">
@@ -78,16 +80,356 @@
   </a>
 
   <!-- NAV -->
-  <!-- … NAV markup unchanged … -->
+  <header class="fixed top-0 inset-x-0 z-50">
+    <nav class="mx-auto max-w-7xl px-4 sm:px-6" aria-label="Primary">
+      <div class="mt-4 glass border border-zinc-800 rounded-2xl px-4 py-2 flex items-center justify-between">
+        <a href="#" class="flex items-center gap-3">
+          <div aria-hidden="true" class="w-9 h-9 rounded-xl grid place-items-center bg-gradient-to-br from-amber-400 to-yellow-600 text-zinc-950 font-extrabold">G</div>
+          <span class="font-semibold tracking-tight">Goldn Productions</span>
+        </a>
+
+        <div class="hidden md:flex items-center gap-6 text-sm">
+          <a href="#work" class="hover:text-yellow-300">Work</a>
+          <a href="#process" class="hover:text-yellow-300">Process</a>
+          <a href="#pricing" class="hover:text-yellow-300">Pricing</a>
+          <a href="#reviews" class="hover:text-yellow-300">Reviews</a>
+          <a href="#contact" class="hover:text-yellow-300">Contact</a>
+          <a href="hub.html" class="ml-2 px-3 py-1 rounded-lg text-xs border border-zinc-700 hover:bg-zinc-800">Open Hub</a>
+          <a href="https://discord.gg/dh2azNrU6q" target="_blank" rel="noopener" class="ml-1 px-4 py-2 rounded-xl ringGlow bg-zinc-900 border border-yellow-500/30 hover:bg-zinc-800">Order</a>
+        </div>
+
+        <button id="menuBtn" class="md:hidden inline-flex items-center justify-center p-2 rounded-lg border border-zinc-700 hover:bg-zinc-800"
+                aria-label="Open menu" aria-expanded="false">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 6h16M4 12h16M4 18h16" stroke="#e4e4e7" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <div id="mobileMenu" class="hidden md:hidden mt-2 glass border border-zinc-800 rounded-2xl p-3">
+        <a class="block px-3 py-2 rounded-lg hover:bg-zinc-800" href="#work">Work</a>
+        <a class="block px-3 py-2 rounded-lg hover:bg-zinc-800" href="#process">Process</a>
+        <a class="block px-3 py-2 rounded-lg hover:bg-zinc-800" href="#pricing">Pricing</a>
+        <a class="block px-3 py-2 rounded-lg hover:bg-zinc-800" href="#reviews">Reviews</a>
+        <a class="block px-3 py-2 rounded-lg hover:bg-zinc-800" href="#contact">Contact</a>
+        <a class="block px-3 py-2 rounded-lg hover:bg-zinc-800" href="hub.html">Open Hub</a>
+        <a class="block px-3 py-2 rounded-xl bg-yellow-500 text-zinc-900 font-semibold hover:bg-yellow-400 mt-1"
+           href="https://discord.gg/dh2azNrU6q" target="_blank" rel="noopener">Order</a>
+      </div>
+    </nav>
+  </header>
 
   <!-- MAIN -->
   <main id="main">
     <!-- HERO -->
-    <!-- … HERO markup unchanged … -->
+    <section class="hero-gradient pt-32 pb-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="grid lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-7">
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight animate-fadeUp animate-delay-0">
+              Roblox Shorts that
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-600 animate-fadeUp animate-delay-1">stop the scroll</span>.
+            </h1>
+            <p class="mt-4 text-zinc-300 max-w-2xl animate-fadeUp animate-delay-2">
+              I create high-retention shorts, trailers, and promo edits for Roblox creators and studios. Clean captions, punchy cuts, viral pacing — delivered fast.
+            </p>
+
+            <div class="mt-6 flex flex-wrap gap-3 animate-fadeUp animate-delay-3">
+              <a href="#work" class="px-5 py-3 rounded-xl bg-yellow-500 text-zinc-900 font-semibold hover:bg-yellow-400">See Work</a>
+              <a href="#pricing" class="px-5 py-3 rounded-xl border border-zinc-700 bg-zinc-900 hover:bg-zinc-800">View Pricing</a>
+              <button id="openTrailer" class="px-5 py-3 rounded-xl border border-yellow-500/40 bg-zinc-900 hover:bg-zinc-800">▶ Watch Trailer</button>
+            </div>
+
+            <div id="orderSlots" class="mt-8 animate-fadeUp animate-delay-4">
+              <div class="card rounded-2xl p-5">
+                <div class="flex items-center justify-between gap-3">
+                  <h3 class="text-lg font-semibold">Order Slots — This Week</h3>
+                  <span class="text-xs text-amber-300/90">⚡ Filling fast</span>
+                </div>
+                <div class="mt-3 h-3 rounded-full bg-zinc-800 overflow-hidden">
+                  <div id="slotsBarHero" class="h-full bg-gradient-to-r from-amber-400 to-yellow-600" style="width:0%"></div>
+                </div>
+                <div class="mt-2 flex items-center justify-between text-sm text-zinc-300">
+                  <span><span id="slotsFilledHero">0</span>/<span id="slotsTotalHero">0</span> filled</span>
+                  <a href="https://discord.gg/dh2azNrU6q" target="_blank" rel="noopener" class="px-3 py-1 rounded-lg bg-yellow-500 text-zinc-900 font-medium hover:bg-yellow-400">Order</a>
+                </div>
+                <p class="text-xs text-zinc-500 mt-2">Reserve your spot — limited weekly capacity.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center mt-6 auto-rows-fr">
+              <div class="p-4 rounded-xl bg-zinc-900/50 h-full flex flex-col items-center justify-center animate-fadeUp animate-delay-2">
+                <div class="text-2xl font-bold text-yellow-400">85M+</div>
+                <div class="text-sm text-zinc-400">Contributed Views</div>
+              </div>
+              <div class="p-4 rounded-xl bg-zinc-900/50 h-full flex flex-col items-center justify-center animate-fadeUp animate-delay-3">
+                <div class="text-2xl font-bold text-yellow-400">&lt;24h</div>
+                <div class="text-sm text-zinc-400">Turnaround</div>
+              </div>
+              <div class="p-4 rounded-xl bg-zinc-900/50 h-full flex flex-col items-center justify-center animate-fadeUp animate-delay-4">
+                <div class="text-2xl font-bold text-yellow-400">1</div>
+                <div class="text-sm text-zinc-400">Live Group Member</div>
+              </div>
+              <div class="p-4 rounded-xl bg-zinc-900/50 h-full flex flex-col items-center justify-center animate-fadeUp animate-delay-5">
+                <div class="text-2xl font-bold text-yellow-400">5★</div>
+                <div class="text-sm text-zinc-400">Client Rating</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-12 py-4 border-t border-zinc-800/60">
+        <div class="marquee text-zinc-400 text-sm">
+          <div class="marquee-track">
+            <span class="mx-6">Fast Trailers</span><span class="mx-6">High-Retention Cuts</span><span class="mx-6">YouTube Shorts</span><span class="mx-6">TikTok Optimized</span><span class="mx-6">Roblox Promos</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORK -->
+    <section id="work" class="py-20 shine">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="flex items-end justify-between mb-6">
+          <h2 class="text-2xl md:text-3xl font-bold">Recent Work</h2>
+          <a href="https://www.youtube.com/@Hxvac" target="_blank" class="text-sm text-yellow-300 hover:underline">See more on YouTube →</a>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-5 place-items-center">
+          <article class="card rounded-2xl overflow-hidden fade work-wrap w-full max-w-[24rem]">
+            <div class="phone-frame">
+              <iframe class="phone-iframe"
+                src="https://www.youtube-nocookie.com/embed/HTPDa4-VWtQ?autoplay=1&mute=1&loop=1&playlist=HTPDa4-VWtQ&controls=0&modestbranding=1"
+                allow="autoplay; encrypted-media" loading="lazy" title="Roblox Edit #1"
+                referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            </div>
+            <div class="hover-layer">
+              <a class="px-3 py-2 rounded-lg bg-yellow-500 text-zinc-900 text-sm font-semibold"
+                 href="https://www.youtube.com/watch?v=HTPDa4-VWtQ" target="_blank" rel="noopener">Watch on YouTube →</a>
+            </div>
+            <div class="p-4">
+              <div class="font-semibold text-center">Roblox Edit #1</div>
+              <p class="text-sm text-zinc-400 text-center">Clean captions + pacing.</p>
+            </div>
+          </article>
+
+          <article class="card rounded-2xl overflow-hidden fade work-wrap w-full max-w-[24rem]">
+            <div class="phone-frame">
+              <iframe class="phone-iframe"
+                src="https://www.youtube-nocookie.com/embed/sHFETDYToEU?autoplay=1&mute=1&loop=1&playlist=sHFETDYToEU&controls=0&modestbranding=1"
+                allow="autoplay; encrypted-media" loading="lazy" title="Roblox Edit #2"
+                referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            </div>
+            <div class="hover-layer">
+              <a class="px-3 py-2 rounded-lg bg-yellow-500 text-zinc-900 text-sm font-semibold"
+                 href="https://www.youtube.com/watch?v=sHFETDYToEU" target="_blank" rel="noopener">Watch on YouTube →</a>
+            </div>
+            <div class="p-4">
+              <div class="font-semibold text-center">Roblox Edit #2</div>
+              <p class="text-sm text-zinc-400 text-center">Fast cuts + effects.</p>
+            </div>
+          </article>
+
+          <article class="card rounded-2xl overflow-hidden fade work-wrap w-full max-w-[24rem]">
+            <div class="phone-frame">
+              <iframe class="phone-iframe"
+                src="https://www.youtube-nocookie.com/embed/db3hIGqW1gQ?autoplay=1&mute=1&loop=1&playlist=db3hIGqW1gQ&controls=0&modestbranding=1"
+                allow="autoplay; encrypted-media" loading="lazy" title="Roblox Edit #3"
+                referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            </div>
+            <div class="hover-layer">
+              <a class="px-3 py-2 rounded-lg bg-yellow-500 text-zinc-900 text-sm font-semibold"
+                 href="https://www.youtube.com/watch?v=db3hIGqW1gQ" target="_blank" rel="noopener">Watch on YouTube →</a>
+            </div>
+            <div class="p-4">
+              <div class="font-semibold text-center">Roblox Edit #3</div>
+              <p class="text-sm text-zinc-400 text-center">Trend sync + captions.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section id="process" class="py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 text-center">
+        <h2 class="text-2xl md:text-3xl font-bold mb-10 animate-fadeUp animate-delay-0">My Editing Process</h2>
+
+        <div class="flex flex-col md:flex-row items-stretch justify-center gap-6">
+          <div class="card rounded-2xl p-6 w-full md:w-1/3 animate-fadeUp animate-delay-1">
+            <h3 class="font-semibold text-lg">1. Finding the Hook</h3>
+            <p class="text-zinc-400 mt-2 text-sm">I start by picking the best moment to grab attention and planning out how captions and pacing will flow.</p>
+          </div>
+
+          <div class="arrow text-yellow-400 hidden md:flex items-center">→</div>
+
+          <div class="card rounded-2xl p-6 w-full md:w-1/3 animate-fadeUp animate-delay-2">
+            <h3 class="font-semibold text-lg">2. Editing the Magic</h3>
+            <p class="text-zinc-400 mt-2 text-sm">This is where I cut, sync to music, add captions, zooms, and effects to make everything smooth and exciting.</p>
+          </div>
+
+          <div class="arrow text-yellow-400 hidden md:flex items-center">→</div>
+
+          <div class="card rounded-2xl p-6 w-full md:w-1/3 animate-fadeUp animate-delay-3">
+            <h3 class="font-semibold text-lg">3. Delivery</h3>
+            <p class="text-zinc-400 mt-2 text-sm">I send the finished short back to you, fully optimized for TikTok or YouTube. Fast turnaround, with revisions if needed.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing" class="py-20 shine">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <h2 class="text-2xl md:text-3xl font-bold mb-8 animate-fadeUp animate-delay-0">Pricing</h2>
+        <div class="grid md:grid-cols-3 gap-5">
+          <!-- Starter -->
+          <div class="card rounded-2xl p-6 animate-fadeUp animate-delay-1">
+            <div class="text-sm text-zinc-400">Starter</div>
+            <div class="text-3xl font-extrabold mt-1">1 Short</div>
+            <div class="mt-2 text-2xl font-bold text-yellow-400">$4 <span class="text-zinc-400 text-base">/ 1,200 Robux</span></div>
+            <p class="text-zinc-400 mt-2">Great for testing pacing and style.</p>
+            <ul class="mt-4 text-sm text-zinc-300 space-y-1">
+              <li>15–30s edit</li><li>Basic captions</li><li>1 revision</li>
+            </ul>
+            <a href="https://discord.gg/dh2azNrU6q" target="_blank" rel="noopener" class="mt-6 inline-block px-4 py-2 rounded-xl border border-zinc-700 hover:bg-zinc-800">Order on Discord</a>
+          </div>
+
+          <!-- Growth -->
+          <div class="card rounded-2xl p-6 animate-fadeUp animate-delay-2">
+            <div class="text-sm text-zinc-400">Growth</div>
+            <div class="text-3xl font-extrabold mt-1">5 Shorts</div>
+            <div class="mt-2 text-2xl font-bold text-yellow-400">$18 <span class="text-zinc-400 text-base">/ 5,000 Robux</span></div>
+            <p class="text-zinc-400 mt-2">Best value for consistent content.</p>
+            <ul class="mt-4 text-sm text-zinc-300 space-y-1">
+              <li>15–45s each</li><li>Goldn captions</li><li>Priority delivery</li>
+            </ul>
+            <a href="https://discord.gg/dh2azNrU6q" target="_blank" rel="noopener" class="mt-6 inline-block px-4 py-2 rounded-xl border border-zinc-700 hover:bg-zinc-800">Order on Discord</a>
+          </div>
+
+          <!-- Standard (Best Value) -->
+          <div class="card rounded-2xl p-6 ringGlow relative animate-fadeUp animate-delay-3">
+            <span class="absolute -top-3 left-1/2 -translate-x-1/2 text-xs px-3 py-1 rounded-full bg-yellow-500 text-zinc-900 font-semibold shadow">Best Value</span>
+            <div class="text-sm text-zinc-400">Standard</div>
+            <div class="text-3xl font-extrabold mt-1">10 Shorts</div>
+            <div class="mt-2 text-2xl font-bold text-yellow-400">$34 <span class="text-zinc-400 text-base">/ 9,500 Robux</span></div>
+            <p class="text-zinc-400 mt-2">Bulk discount for serious growth.</p>
+            <ul class="mt-4 text-sm text-zinc-300 space-y-1">
+              <li>15–45s each</li><li>Goldn captions</li><li>Priority delivery</li>
+            </ul>
+            <a href="https://discord.gg/dh2azNrU6q" target="_blank" rel="noopener" class="mt-6 inline-block px-4 py-2 rounded-xl bg-yellow-500 text-zinc-900 font-semibold hover:bg-yellow-400">Order on Discord</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <section id="reviews" class="py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="flex items-end justify-between mb-8">
+          <h2 class="text-2xl md:text-3xl font-bold">What clients say</h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-5 auto-rows-fr">
+          <article class="card rounded-2xl p-6 animate-fadeUp animate-delay-1 h-full flex flex-col">
+            <div class="flex items-center justify-between">
+              <div>
+                <div class="font-semibold">
+                  <a href="https://www.tiktok.com/@spirebloxs" target="_blank" rel="noopener" class="hover:text-yellow-300">
+                    Spireblox
+                  </a>
+                </div>
+                <div class="text-sm text-zinc-400">TikTok Creator</div>
+              </div>
+              <div class="text-yellow-400" aria-label="5 out of 5 stars">★★★★★</div>
+            </div>
+            <blockquote class="mt-3 text-sm text-zinc-300 flex-1">
+              “Very high quality videos and editing for a cheap price. 10/10 definitely recommend!”
+            </blockquote>
+          </article>
+
+          <article class="card rounded-2xl p-6 animate-fadeUp animate-delay-2 h-full flex flex-col">
+            <div class="flex items-center justify-between">
+              <div>
+                <div class="font-semibold">
+                  <a href="https://www.youtube.com/@OnlyWhizz" target="_blank" rel="noopener" class="hover:text-yellow-300">
+                    Whizz
+                  </a>
+                </div>
+                <div class="text-sm text-zinc-400">YouTube Shorts Creator</div>
+              </div>
+              <div class="text-yellow-400" aria-label="5 out of 5 stars">★★★★★</div>
+            </div>
+            <blockquote class="mt-3 text-sm text-zinc-300 flex-1">
+              “This guy is very legit. He offers very efficient customer service and will piece together your product the way you want it. Super nice guy, I highly recommend!”
+            </blockquote>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="py-20">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center">
+        <div class="card rounded-2xl p-8 animate-fadeUp animate-delay-0">
+          <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">ORDER ON DISCORD:</h2>
+          <p class="text-zinc-400 mt-3">Fast quotes, bundles, and delivery status handled in the server.</p>
+          <a href="https://discord.gg/dh2azNrU6q" target="_blank" rel="noopener" class="mt-5 inline-block px-6 py-3 rounded-xl bg-yellow-500 text-zinc-900 font-semibold hover:bg-yellow-400">Order</a>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- FOOTER -->
-  <!-- … FOOTER markup unchanged … -->
+  <footer class="py-10 border-t border-zinc-800/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col gap-6 text-sm text-zinc-400">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
+        <span>© <span id="year"></span> Goldn Productions</span>
+        <nav class="flex items-center gap-4" aria-label="Footer">
+          <a href="#work" class="hover:text-yellow-300">Work</a>
+          <a href="#pricing" class="hover:text-yellow-300">Pricing</a>
+          <a href="https://discord.gg/dh2azNrU6q" class="hover:text-yellow-300" target="_blank" rel="noopener">Order on Discord</a>
+        </nav>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="https://www.youtube.com/@Hxvac" target="_blank" rel="noopener" aria-label="YouTube"
+           class="w-8 h-8 grid place-items-center rounded-lg bg-zinc-900 border border-zinc-700 hover:bg-zinc-800">▶</a>
+        <a href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok"
+           class="w-8 h-8 grid place-items-center rounded-lg bg-zinc-900 border border-zinc-700 hover:bg-zinc-800">𝕋</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Sticky Order for mobile -->
+  <a href="https://discord.gg/dh2azNrU6q" target="_blank" rel="noopener"
+     class="md:hidden sticky-order bg-yellow-500 text-zinc-900 hover:bg-yellow-400">
+    Order
+  </a>
+
+  <!-- Trailer Modal (YouTube) -->
+  <div id="trailerModal" class="fixed inset-0 z-[100] hidden">
+    <div class="absolute inset-0 bg-black/70"></div>
+
+    <div class="relative mx-auto max-w-4xl mt-14 p-4">
+      <div class="aspect-video rounded-2xl overflow-hidden bg-black ringGlow">
+        <iframe id="trailerIframe"
+          class="w-full h-full"
+          src=""
+          title="Showcase Trailer"
+          allow="autoplay; encrypted-media"
+          allowfullscreen
+          referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      </div>
+
+      <button id="closeTrailer"
+        class="absolute -top-3 right-4 px-3 py-1.5 rounded-lg bg-yellow-500 text-zinc-900 font-semibold hover:bg-yellow-400">
+        Close
+      </button>
+    </div>
+  </div>
 
   <script>
     // Reveal on scroll for .fade sections
@@ -97,7 +439,8 @@
     document.querySelectorAll('.fade').forEach(el=>io.observe(el));
 
     // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
 
     // Order Slots
     const TOTAL_SLOTS = 25;
@@ -121,6 +464,34 @@
         menuBtn.setAttribute('aria-expanded', String(!isHidden));
       });
     }
+
+    // Trailer modal logic (YouTube)
+    const ytId = '2lygNTOSoaU';
+    const openBtn = document.getElementById('openTrailer');
+    const modal = document.getElementById('trailerModal');
+    const closeBtn = document.getElementById('closeTrailer');
+    const iframe = document.getElementById('trailerIframe');
+    const ytURL = `https://www.youtube-nocookie.com/embed/${ytId}?autoplay=1&mute=0&controls=1&modestbranding=1`;
+
+    function openModal(){
+      modal.classList.remove('hidden');
+      iframe.src = ytURL;
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(){
+      modal.classList.add('hidden');
+      iframe.src = ''; // stop playback
+      document.body.style.overflow = '';
+    }
+
+    openBtn?.addEventListener('click', openModal);
+    closeBtn?.addEventListener('click', closeModal);
+    modal?.addEventListener('click', (e)=>{
+      if(e.target === modal || e.target.classList?.contains('bg-black/70')) closeModal();
+    });
+    window.addEventListener('keydown', (e)=>{
+      if(e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
+    });
   </script>
 </body>
 </html>
